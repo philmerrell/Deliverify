@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "angular-mocks": "^1.4.9",
+    "gulp": "^3.9.1",
     "karma": "^0.13.19",
     "karma-chrome-launcher": "^0.2.2",
     "karma-jasmine": "^0.3.6",
@@ -25,6 +26,7 @@
   },
   "scripts": {
     "prestart": "npm update",
-    "tests": "karma start ./test/karma.conf.js"
+    "tests": "karma start ./test/karma.conf.js",
+    "deploy": "git subtree push --prefix app origin gh-pages"
   }
 }
