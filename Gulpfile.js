@@ -16,12 +16,12 @@ var dependencies = [
 gulp.task('index', function() {
   var target = gulp.src('./app/index.html');
   var files = [].concat(
-    './node_modules/angular/angular.js',
-    './node_modules/angular-animate/angular-animate.js',
-    './node_modules/angular-aria/angular-aria.js',
-    './node_modules/angular-material/angular-material.js',
-    './node_modules/angular-ui-router/release/angular-ui-router.js',
-    './node_modules/lodash/lodash.js',
+    'node_modules/angular/angular.js',
+    'node_modules/angular-animate/angular-animate.js',
+    'node_modules/angular-aria/angular-aria.js',
+    'node_modules/angular-material/angular-material.js',
+    'node_modules/angular-ui-router/release/angular-ui-router.js',
+    'node_modules/lodash/lodash.js',
     './app/src/**/*.module.js',
     './app/src/**/*.controller.js'
   );
