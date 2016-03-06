@@ -29,6 +29,6 @@
   "scripts": {
     "prestart": "npm update",
     "tests": "karma start ./test/karma.conf.js",
-    "deploy": "git subtree push --prefix app origin gh-pages"
+    "deploy": "git subtree push --prefix build origin gh-pages"
   }
 }
