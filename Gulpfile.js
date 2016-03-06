@@ -47,12 +47,12 @@ gulp.task('copy', ['clean'], function() {
     .pipe(gulp.dest('./build'));
 
   gulp.src([
-    './node_modules/angular/angular.js',
-    './node_modules/angular-animate/angular-animate.js',
-    './node_modules/angular-aria/angular-aria.js',
-    './node_modules/angular-material/angular-material.js',
-    './node_modules/angular-ui-router/release/angular-ui-router.js',
-    './node_modules/lodash/lodash.js'
+    'node_modules/angular/angular.js',
+    'node_modules/angular-animate/angular-animate.js',
+    'node_modules/angular-aria/angular-aria.js',
+    'node_modules/angular-material/angular-material.js',
+    'node_modules/angular-ui-router/release/angular-ui-router.js',
+    'node_modules/lodash/lodash.js'
   ]).pipe(gulp.dest('./build/node_modules'));
 
   return stream;
