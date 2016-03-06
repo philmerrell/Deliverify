@@ -1,0 +1,56 @@
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower);
+
+
+.angular-google-map-container { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+
+/*#map_canvas_container {position: relative;}
+
+#map_canvas {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}*/
+
+.header {
+  font-family: 'Indie Flower', cursive;
+  font-size: 35px;
+  color: #888888;
+  margin: 0 0 5px 5px;  
+}
+
+.hero-font {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: 'Indie Flower', cursive !important;
+  font-size: 6em;
+}
+
+.hero-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgb(33,150,243); background-size: cover;
+}
+
+.hero-container-content {
+    text-align: center;
+    max-width: 1200;
+    margin-top: 0; 
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.hint {
+  font-size: 0.6em;
+  color: #666;
+  
+}
+
+body {
+  font-size: 1.2em;
+}
+  
+md-content {
+
+}
+
+.md-input-container {
+  margin: 5px 0;
+}
+
+@import url(src/free-trial-form/freeTrialForm.css);
