@@ -6,5 +6,5 @@ tmp
 .DS_Store
 .idea
 .vscode
-.bin
+build/
 app/jspm_packages
