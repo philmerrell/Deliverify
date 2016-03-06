@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <title>Deliverly</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="../node_modules/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="assets/app.css"/>
+
+    <style type="text/css">
+        /**
+         * Hide when Angular is not yet loaded and initialized
+         */
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+          display: none !important;
+        }
+    </style>
+
+  </head>
+
+  <body ng-app="app" layout="row" ng-controller="AppCtrl as app" ng-cloak >
+    
+    <!-- LEFT NAVIGATION -->
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="app.shouldLockOpen()" style="background: #f8f8f8;" md-component-id="left">
+      <md-toolbar class="md-theme-dark md-tall">
+        <div class="md-toolbar-tools">
+          <span flex></span>
+          <p class="header" style="margin-top: 50px; color: #fff; font-size: 3em;">deliverify</p>
+          <span flex></div>
+        </div>
+      </md-toolbar>
+      
+          <!-- FREE TRIAL -->
+    <md-content ng-if="!app.userService.getCurrentUser();" class="trial-form" layout-padding>
+        <md-button hide-gt-sm class="md-icon-button md-accent" aria-label="Close" ng-click="app.closeSidenav('left')">
+          <md-icon md-svg-icon="./assets/svg/close_white.svg"></md-icon>
+      	</md-button>
+        <h1 class="md-headline">Start your free 14-day trial</h1>
+        <form>
+            <md-input-container style="width: 100%">
+            <label for="testInput">Email address</label>
+            <input type="text" id="testInput" ng-model="trial.email" md-autofocus>
+            </md-input-container>
+            <md-input-container style="width: 100%">
+            <label for="password">Password</label>
+            <input type="password" id="password" ng-model="trial.password">
+            </md-input-container>
+            <md-input-container style="width: 100%">
+            <label for="storeName">Your store name</label>
+            <input type="text" id="storeName" ng-model="trial.storeName">
+            <p ng-if="trial.storeName" class="hint">https://<b>{{app.domainify(trial.storeName)}}</b>.deliverify.com</p>
+            </md-input-container>
+            <md-button ng-click="app.startFreeTrial(trial);" style="width: 100%" class="md-primary md-raised">Get started</md-button>
+        </form>
+    </md-content>
+    
+    <!-- USER MENU -->
+    <md-content ng-if="app.userService.getCurrentUser();">
+      <div layout="column" class="md-toolbar-tools md-toolbar-tools-bottom">
+          <h2 class="md-subhead">
+            Mealatron 9000
+          </h2>
+          <span flex></span>
+          <md-button ng-click="app.go('admin.settings')" class="md-fab md-primary md-mini">
+              <md-tooltip md-direction="top">Modify your app</md-tooltip>
+              <md-icon md-svg-src="assets/svg/settings-white.svg"></md-icon>
+          </md-button>
+          <md-button class="md-fab md-secondary md-mini">
+              <md-tooltip md-direction="top">Preview your app</md-tooltip>
+              <md-icon md-svg-src="assets/svg/preview-white.svg"></md-icon>
+          </md-button>
+          <!--<md-button class="md-secondary">Preview <md-icon md-svg-src="assets/svg/preview-white.svg"></md-icon></md-button>-->
+          <!--<span style="margin-right: 10px;"></span>-->
+        </div>
+      <md-button ng-click="app.go('admin.orders')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/store_black.svg"></md-icon> Orders</md-button>
+      <md-button ng-click="app.go('admin.storeInfo')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/info_black.svg"></md-icon> Store Info</md-button>
+      <md-button ng-click="app.go('admin.menu')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/menu_black.svg"></md-icon> Menu</md-button>
+      <md-button ng-click="app.go('admin.account')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/account_black.svg"></md-icon> Account</md-button>
+            
+    </md-content>
+      
+    </md-sidenav>
+    
+    <!--RIGHT NAVIGATION -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z1" md-component-id="right">
+        <div ui-view="rightSidenav"></div>
+    </md-sidenav>
+
+    <div layout="column" flex style="">
+        <md-toolbar ng-if="app.state.current.name !== 'home' && app.state.current.name !== 'freeTrialForm'" style="background: #f8f8f8;" class="md-whiteframe-z1">
+            <div class="md-toolbar-tools">
+              <md-button hide-gt-sm ng-click="app.openSidenav('left')" ng-if="app.userService.getCurrentUser()" class="md-icon-button md-accent" aria-label="Close" >
+                  <md-icon md-svg-icon="assets/svg/menu.svg"></md-icon>
+              </md-button>
+              <h1 style="color: #666; font-size: 1.5em; font-weight: 100">{{app.appService.getNavTitle()}}</h1>
+               
+                <span flex></span>
+                <md-button ng-if="app.appService.getNavActions()" ng-click="app.state.go(app.appService.getNavActions().state, app.appService.getNavActions().param)" class="md-raised md-primary">{{app.appService.getNavActions().title}}</md-button>
+               <!--<p class="header" style="color: #fff;">deliverify</p>-->
+            </div>
+        </md-toolbar>
+        <md-content layout="column" flex>
+            <div flex ui-view="main"></div>
+        </md-content>
+    </div>
+
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false&&libraries=geometry,drawing'></script>
+    <script src="https://cdn.jsdelivr.net/lodash/4.5.0/lodash.min.js"></script>
+    <script src="../node_modules/angular/angular.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+
+    <!--<script src="../node_modules/angular-animate/angular-animate.js"></script>-->
+    <!--<script src="../node_modules/angular-aria/angular-aria.js"></script>-->
+    <!--<script type="text/javascript" src="../node_modules/angular-material/angular-material.js"></script>-->
+    <!--<script type="text/javascript" src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>-->
+    <!--<script src='../node_modules/angular-simple-logger/dist/angular-simple-logger.js'></script>-->
+    <!--<script src='../node_modules/angular-google-maps/dist/angular-google-maps.js'></script>-->
+
+    <!-- inject:js -->
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="node_modules/lodash/lodash.js"></script>
+    <script src="src/app.module.js"></script>
+    <script src="src/admin/admin.module.js"></script>
+    <script src="src/free-trial-form/freeTrialForm.module.js"></script>
+    <script src="src/home/home.module.js"></script>
+    <script src="src/app.controller.js"></script>
+    <script src="src/admin/admin.controller.js"></script>
+    <script src="src/free-trial-form/freeTrialForm.controller.js"></script>
+    <script src="src/home/home.controller.js"></script>
+    <script src="src/admin/account/account.controller.js"></script>
+    <script src="src/admin/contactInfo/contactInfo.controller.js"></script>
+    <script src="src/admin/delivery-zones/deliveryZones.controller.js"></script>
+    <script src="src/admin/hours/hours.controller.js"></script>
+    <script src="src/admin/menu/menu.controller.js"></script>
+    <script src="src/admin/menu/menuItem.controller.js"></script>
+    <script src="src/admin/orders/orders.controller.js"></script>
+    <script src="src/admin/settings/settings.controller.js"></script>
+    <script src="src/admin/storeInfo/storeInfo.controller.js"></script>
+    <!-- endinject -->
+  </body>
+</html>

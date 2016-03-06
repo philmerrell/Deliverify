@@ -1,0 +1,21 @@
+<div layout="row" layout-align="center center">
+    <md-card style="max-width: 800px;" layout-padding flex>
+        <h2 class="md-subhead">Branding</h2>
+        <div layout-xs="column" layout-gt-xs="row">
+            <md-input-container flex-gt-xs="45" flex>
+                <label for="displayName">Display name</label>
+                <input type="text" id="displayName" ng-model="vm.store.displayName">
+                <div class="hint">This will be displayed through out your app.</div>
+            </md-input-container>
+            <md-input-container flex-gt-xs="65" flex>
+                <label for="tagline">Tagline</label>
+                <input type="text" id="tagline" ng-model="vm.store.tagline">
+                <div class="hint">This will be displayed on the home view.</div>
+            </md-input-container>
+        </div>
+        <div layout-xs="column" layout-gt-xs="row">
+
+        </div>
+    </md-card>
+</div>
+

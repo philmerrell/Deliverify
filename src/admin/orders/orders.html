@@ -1,0 +1,46 @@
+<!--<div class="hero-container" style="background-image: url(assets/img/bg4.png); background-size: cover;">
+    <div class="hero-container-content">
+        <h1 class="header md-display-2" style="margin-top: 0; color: #fff; text-shadow: 2px 2px 0 #000;">Admin Dashboard</h1>
+    </div>
+</div>-->
+<div layout="row" layout-align="center center">
+  <div style="max-width: 800px;" flex>
+      <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="Incoming Orders">
+            <md-content class="md-padding">
+              <h1 class="md-headline">{{vm.orders.length}} Incoming Orders</h1>
+              <md-card ng-repeat="order in vm.orders | orderBy: 'timeSubmitted'">
+                  <md-card-content>
+                      <div>
+                          <md-list>
+                              <md-list-item class="md-1-line">
+                                  <div class="md-list-item-text">
+                                      <h2>{{order.user.first+' '+order.user.last}} <small>${{order.total}}</small></h2>
+                                  </div>
+                              </md-list-item>
+                              <md-divider></md-divider>
+                              <md-list-item ng-if="order.orderStatus === 'Acknowledged'" ng-repeat="item in order.cart" class="md-3-line">
+                                  <img ng-src="{{item.Image}}" class="md-avatar" alt="{{item.Name}}" />
+                                  <div class="md-list-item-text">
+                                      <h3>{{ item.Name }}</h3>
+                                      <p><span ng-repeat="ingredient in item.Ingredients">{{ingredient}}<span ng-if="!$last">,</span> </span></p>
+                                  </div>
+                              </md-list-item>
+                          </md-list>
+                      </div>
+                  </md-card-content>
+                  <div class="md-actions" layout="row" layout-align="end center">
+                      <md-button ng-if="order.orderStatus === 'Order submitted'" ng-click="vm.acknowledgeOrder(order)">Acknowledge</md-button>
+                      <md-button ng-if="order.orderStatus === 'Acknowledged'" ng-click="vm.readyForDelivery(order)">Ready For Delivery</md-button>
+                      <md-button ng-if="order.orderStatus === 'Ready For Delivery'" ng-click="vm.enroute(order)">Ready For Delivery</md-button>
+                  </div>
+              </md-card>
+          </md-content>
+          </md-tab>
+          <md-tab label="Ready for Delivery"></md-tab>
+          <md-tab label="En Route"></md-tab>
+      </md-tabs>
+  </div>
+</div>
+          
+            
