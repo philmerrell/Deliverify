@@ -6,6 +6,7 @@ var gulp    = require('gulp'),
   ;
 
 var npmSources = [
+  'node_modules/angular-material/angular-material.css',
   'node_modules/angular/angular.js',
   'node_modules/angular-animate/angular-animate.js',
   'node_modules/angular-aria/angular-aria.js',
@@ -22,6 +23,7 @@ var npmSources = [
 gulp.task('index', function() {
 
   var appStream = gulp.src([
+      './app/assets/app.css',
       './app/src/**/*.module.js',
       './app/src/**/*.service.js',
       './app/src/**/*.controller.js'
