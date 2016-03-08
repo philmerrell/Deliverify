@@ -14,7 +14,7 @@ module.exports = function (config) {
       'app/src/users/UserService.js',
       'app/src/users/UserController.js',
 
-      'test/unit/**/*.js'
+      '/unit/**/*.js'
     ],
 
     logLevel: config.LOG_ERROR,

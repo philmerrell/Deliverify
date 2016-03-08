@@ -22,7 +22,8 @@
   },
   "scripts": {
     "prestart": "npm update",
-    "tests": "karma start ./test/karma.conf.js",
+    "build": "gulp build",
+    "test": "karma start ./tests/karma.conf.js",
     "deploy": "gulp build && git commit -am  \"build for gh-pages\" && git push origin master && git subtree push --prefix build origin gh-pages"
   }
 }

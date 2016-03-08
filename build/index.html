@@ -60,7 +60,7 @@
     </md-content>
     
     <!-- USER MENU -->
-    <md-content ng-if="app.userService.getCurrentUser();">
+    <div ng-if="app.userService.getCurrentUser();">
       <div layout="column" class="md-toolbar-tools md-toolbar-tools-bottom">
           <h2 class="md-subhead">
             Mealatron 9000
@@ -77,12 +77,17 @@
           <!--<md-button class="md-secondary">Preview <md-icon md-svg-src="assets/svg/preview-white.svg"></md-icon></md-button>-->
           <!--<span style="margin-right: 10px;"></span>-->
         </div>
-      <md-button ng-click="app.go('admin.orders')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/store_black.svg"></md-icon> Orders</md-button>
-      <md-button ng-click="app.go('admin.storeInfo')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/info_black.svg"></md-icon> Store Info</md-button>
-      <md-button ng-click="app.go('admin.menu')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/menu_black.svg"></md-icon> Menu</md-button>
-      <md-button ng-click="app.go('admin.account')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/account_black.svg"></md-icon> Account</md-button>
-            
-    </md-content>
+        <md-divider></md-divider>
+        <md-button ng-click="app.go('admin.orders')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/store_black.svg"></md-icon> Orders</md-button>
+        <md-divider></md-divider>
+        <md-button ng-click="app.go('admin.storeInfo')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/info_black.svg"></md-icon> Store Info</md-button>
+        <md-divider></md-divider>
+        <md-button ng-click="app.go('admin.menu')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/menu_black.svg"></md-icon> Menu</md-button>
+        <md-divider></md-divider>
+        <md-button ng-click="app.go('admin.account')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/account_black.svg"></md-icon> Account</md-button>
+        <md-divider></md-divider>
+
+    </div>
       
     </md-sidenav>
     
