@@ -6,39 +6,83 @@
 <div layout="row" layout-align="center center">
   <div style="max-width: 800px;" flex>
       <md-tabs md-dynamic-height md-border-bottom>
-          <md-tab label="Incoming Orders">
-            <md-content class="md-padding">
-              <h1 class="md-headline">{{vm.orders.length}} Incoming Orders</h1>
-              <md-card ng-repeat="order in vm.orders | orderBy: 'timeSubmitted'">
-                  <md-card-content>
-                      <div>
-                          <md-list>
-                              <md-list-item class="md-1-line">
+
+
+          <md-tab>
+              <md-tab-label>
+                  {{vm.orders.length}} Incoming Orders
+              </md-tab-label>
+              <md-tab-body>
+            <!--<md-content class="md-padding">-->
+                  <md-card>
+                      <md-card-content>
+                          <!--<md-subheader md-no-sticky class="md-primary">{{vm.orders.length}} Incoming Orders</md-subheader>-->
+                          <div ng-if="!vm.orders.length">
+                              <h1 class="md-headline">There are no incoming orders.</h1>
+                              <p class="md-display-3">¯\_(ツ)_/¯</p>
+                              <p>(but to demo you can add <a href class="md-primary">orders</a>.)</p>
+                          </div>
+                          <md-list ng-repeat="order in vm.orders | orderBy: 'timeSubmitted'">
+                              <md-list-item class="md-2-line">
                                   <div class="md-list-item-text">
-                                      <h2>{{order.user.first+' '+order.user.last}} <small>${{order.total}}</small></h2>
+                                      <h4>{{order.deliveryAddress}}</h4>
+                                      <p>${{order.total}}</p>
                                   </div>
+                                  <md-button ng-if="order.orderStatus === 'Order submitted'" ng-click="vm.acknowledgeOrder(order)" class="md-raised md-primary">Acknowledge</md-button>
+                                  <md-button ng-if="order.orderStatus === 'Acknowledged'" ng-click="vm.readyForDelivery(order)" class="md-raised md-secondary">Ready For Delivery</md-button>
+                                  <!--<md-button ng-if="order.orderStatus === 'Ready For Delivery'" ng-click="vm.enroute(order)">Ready For Delivery</md-button>-->
                               </md-list-item>
-                              <md-divider></md-divider>
-                              <md-list-item ng-if="order.orderStatus === 'Acknowledged'" ng-repeat="item in order.cart" class="md-3-line">
+                              <md-list-item style="background: rgba(135,206,250, 0.1)" ng-if="order.orderStatus === 'Acknowledged'" ng-repeat="item in order.cart" class="md-3-line">
                                   <img ng-src="{{item.Image}}" class="md-avatar" alt="{{item.Name}}" />
                                   <div class="md-list-item-text">
                                       <h3>{{ item.Name }}</h3>
                                       <p><span ng-repeat="ingredient in item.Ingredients">{{ingredient}}<span ng-if="!$last">,</span> </span></p>
                                   </div>
                               </md-list-item>
+                              <md-divider></md-divider>
+
                           </md-list>
-                      </div>
-                  </md-card-content>
-                  <div class="md-actions" layout="row" layout-align="end center">
-                      <md-button ng-if="order.orderStatus === 'Order submitted'" ng-click="vm.acknowledgeOrder(order)">Acknowledge</md-button>
-                      <md-button ng-if="order.orderStatus === 'Acknowledged'" ng-click="vm.readyForDelivery(order)">Ready For Delivery</md-button>
-                      <md-button ng-if="order.orderStatus === 'Ready For Delivery'" ng-click="vm.enroute(order)">Ready For Delivery</md-button>
-                  </div>
-              </md-card>
-          </md-content>
+                      </md-card-content>
+                  </md-card>
+              </md-tab-body>
+          <!--</md-content>-->
           </md-tab>
-          <md-tab label="Ready for Delivery"></md-tab>
-          <md-tab label="En Route"></md-tab>
+          <md-tab>
+              <md-tab-label>
+                  {{vm.ready.length}} Ready
+              </md-tab-label>
+              <md-tab-body>
+                <md-card>
+                    <md-card-content>
+                        <md-list>
+                            <md-list-item ng-repeat="order in vm.ready | orderBy: 'timeSubmitted'">
+                                <md-checkbox ng-change="vm.updateDeliveryCart(order)" ng-model="order.selected"></md-checkbox>
+                                <p>{{order.deliveryAddress}}</p>
+                                <!--<md-icon class="md-secondary" ng-click="" aria-label="Directions" md-svg-src="assets/svg/car_black.svg"></md-icon>-->
+                            </md-list-item>
+                        </md-list>
+                    </md-card-content>
+                </md-card>
+              </md-tab-body>
+          </md-tab>
+          <md-tab label="En Route">
+              <md-tab-label>
+                  {{vm.enroute.length}} Enroute
+              </md-tab-label>
+              <md-tab-body>
+              <md-card>
+                  <md-card-content>
+                      <md-list>
+                          <md-list-item ng-repeat="order in vm.enroute">
+                              <p>{{order.deliveryAddress}}</p>
+                              <a class="md-icon-button" target="_blank" ng-href="https://www.google.com/maps/dir/Current+Location/{{order.deliveryAddress}}" >
+                                  <md-icon class="md-secondary" aria-label="Directions" md-svg-src="assets/svg/car_black.svg"></md-icon>
+                              </a>
+                          </md-list-item>
+                      </md-list>
+                  </md-card-content>
+              </md-card>
+          </md-tab>
       </md-tabs>
   </div>
 </div>

@@ -1,7 +1,7 @@
 {
   "name": "deliverify-admin",
   "version": "0.0.4",
-  "description": "My Udacity Tech Entrepreneur Nanodegree project",
+  "description": "My Udacity Tech Entrepreneur nanodegree project",
   "repository": "https://github.com/philmerrell/deliverify-admin",
   "dependencies": {
     "angular": "^1.4.9",
@@ -24,6 +24,6 @@
     "prestart": "npm update",
     "build": "gulp build",
     "test": "karma start ./tests/karma.conf.js",
-    "deploy": "gulp build && git commit -am  \"build for gh-pages\" && git push origin master && git subtree push --prefix build origin gh-pages"
+    "deploy": "git push origin master && git subtree push --prefix build origin gh-pages"
   }
 }

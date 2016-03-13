@@ -1,20 +1,21 @@
 <div layout="row" layout-align="center center">
   <md-card style="max-width: 800px;" layout-padding flex>
     <!--<h2 class="md-subhead">Add hours</h2>-->
-    <form ng-submit="vm.addHours()">
+    <form ng-submit="vm.addHours(vm.newHours)">
       <div layout-xs="column" layout-gt-xs="row">
         <md-input-container flex-gt-xs="20" flex>
           <label for="displayName">Start time</label>
-          <input type="text" id="displayName" ng-model="vm.store.displayName">
+          <input type="text" id="displayName" ng-model="vm.newHours.startTime">
           <!--<div class="hint">This will be displayed through out your app.</div>-->
         </md-input-container>
         <md-input-container flex-gt-xs="20" flex>
           <label for="tagline">End time</label>
-          <input type="text" id="tagline" ng-model="vm.store.tagline">
+          <input type="text" id="tagline" ng-model="vm.newHours.endTime">
           <!--<div class="hint">This will be displayed on the home view.</div>-->
         </md-input-container>
-        <md-input-container flex-gt-xs="60" flex>
-          <md-select ng-model="someModel" placeholder="Select a day">
+
+        <md-input-container flex-gt-xs="50" flex>
+          <md-select ng-model="vm.newHours.day" placeholder="Select a day">
             <md-option value="Monday">Monday</md-option>
             <md-option value="Tuesday">Tuesday</md-option>
             <md-option value="Wednesday">Wednesday</md-option>
@@ -23,7 +24,9 @@
             <md-option value="Saturday">Saturday</md-option>
             <md-option value="Sunday">Sunday</md-option>
           </md-select>
+
         </md-input-container>
+        <md-button ng-click="vm.addHours(vm.newHours)" class="md-primary">add</md-button>
       </div>
     </form>
     <div layout-xs="column" layout-gt-xs="row">

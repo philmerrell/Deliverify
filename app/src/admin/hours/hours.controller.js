@@ -12,6 +12,7 @@
     vm.removeHours = removeHours;
 
     vm.hours = [];
+    vm.newHours = {};
     
     ///////////////////////////////////////////////
 
@@ -30,6 +31,7 @@
 
     function addHours(hours) {
       vm.hours.push(hours);
+      vm.newHours = {};
 
     }
 
