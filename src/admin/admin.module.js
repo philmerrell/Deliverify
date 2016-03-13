@@ -105,6 +105,16 @@
             }
           }
         })
+
+        .state('admin.account', {
+          url: '/account',
+          views: {
+            "admin": {
+              templateUrl: 'src/admin/account/account.html',
+              controller: 'AccountCtrl as vm'
+            }
+          }
+        })
         ;
     }
 })();

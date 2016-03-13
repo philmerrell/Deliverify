@@ -9,15 +9,20 @@
       var storeId = '';
       var storeRef;
       var firebase = new Firebase("https://deliverify-phil.firebaseio.com/stores/");
-      
+      var ref = new Firebase("https://philmerrell.firebaseio.com/orders/");
+
+
       var service = {
-        createNewStore      : createNewStore,
-        getDemoStore        : getDemoStore,
-        getIncomingOrders   : getIncomingOrders,
-        getStoreId          : getStoreId,
-        setStoreId          : setStoreId,
-        getStoreRef         : getStoreRef,
-        setStoreRef         : setStoreRef
+        createNewStore                : createNewStore,
+        getDemoStore                  : getDemoStore,
+        getEnrouteDeliveryOrders      : getEnrouteDeliveryOrders,
+        getIncomingOrders             : getIncomingOrders,
+        getReadyForDeliveryOrders     : getReadyForDeliveryOrders,
+        getStoreId                    : getStoreId,
+        setStoreId                    : setStoreId,
+        getStoreRef                   : getStoreRef,
+        setStoreRef                   : setStoreRef
+        //updateDeliveryStatusToEnroute : updateDeliveryStatusToEnroute
       };
       
       return service;
@@ -58,19 +63,23 @@
       function getMenuItems() {
         
       }
-      
-      // Firebase
-      
+
       function getIncomingOrders() {
         
         if(storeId === 'demo') {
-          var ref = new Firebase("https://philmerrell.firebaseio.com/orders/");
           return $firebaseArray(ref.orderByChild("progress").equalTo("Ordered"));
         } else {
-          var ref = new Firebase("https://philmerrell.firebaseio.com/orders/");
-          return $firebaseArray(ref.orderByChild("progress").equalTo("Ordered"));
+
         }
         
+      }
+
+      function getReadyForDeliveryOrders() {
+        return $firebaseArray(ref.orderByChild("progress").equalTo("Made"));
+      }
+
+      function getEnrouteDeliveryOrders() {
+        return $firebaseArray(ref.orderByChild("progress").equalTo("Delivering"));
       }
       
       function getStoreId() {
@@ -91,5 +100,17 @@
       function getStoreRef() {
         return storeRef;
       }
+
+      //function updateDeliveryStatusToEnroute(order) {
+      //  order.orderStatus = 'Order Enroute';
+      //  order.progress = 'Delivering';
+      //  order.selected = false;
+      //
+      //  var orderRef = ref.child(order.$id);
+      //  orderRef.update(order);
+      //
+      //  //ref.update(order);
+      //
+      //}
     }
 })();
