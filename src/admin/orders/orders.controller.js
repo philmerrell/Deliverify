@@ -11,6 +11,7 @@
 
       vm.deliveryCart = [];
       vm.orders = [];
+      vm.ordersLoaded = false;
       vm.ready = [];
       vm.enroute = [];
 
@@ -34,6 +35,8 @@
       
       function getIncomingOrders() {
         vm.orders = StoreService.getIncomingOrders();
+
+        vm.orders.$loaded(function() { vm.ordersLoaded = true; });
         return vm.orders;
       }
       
@@ -58,7 +61,6 @@
 
       function getEnrouteDeliveryOrders() {
         vm.enroute = StoreService.getEnrouteDeliveryOrders();
-        console.log(vm.enroute);
         return vm.enroute;
       }
 
@@ -108,7 +110,6 @@
       }
 
       $scope.$watch(function() { return vm.deliveryCart}, function(newVal) {
-        console.log(newVal.length);
         if(newVal.length > 0) {
           showDeliveryCartToast();
         } else {

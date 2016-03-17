@@ -49,4 +49,17 @@ md-content {
   margin: 5px 0;
 }
 
+div[ta-bind="ta-bind"] {
+    border: 1px solid #666;
+}
+
+div[ta-bind="ta-bind"] h1, h2, h3, p {
+    margin: 0;
+}
+
+button {
+    background: #fff;
+    border: 1px solid #666;
+}
+
 @import url(src/free-trial-form/freeTrialForm.css);
