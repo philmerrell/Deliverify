@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app', ['ngMaterial', 'ui.router', 'uiGmapgoogle-maps', 'firebase', 'app.home', 'app.freeTrialForm', 'app.services', 'app.admin'])
+    .module('app', ['ngMaterial', 'ui.router', 'uiGmapgoogle-maps', 'firebase', 'color.picker', 'textAngular', 'app.home', 'app.freeTrialForm', 'app.services', 'app.admin'])
     .config(function($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
       $mdIconProvider
         .defaultIconSet("./assets/svg/avatars.svg", 128)

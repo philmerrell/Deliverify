@@ -1,0 +1,59 @@
+<div layout="row" layout-align="center center">
+    <md-card style="max-width: 800px;" layout-padding flex>
+        <p>Configure your store's application</p>
+        <h2 class="md-subhead">Branding</h2>
+        <div layout-xs="column" layout-gt-xs="row">
+            <div flex-gt-xs="33" flex>
+                <color-picker ng-model="vm.app.primaryColor" color-picker-format="'hex'"></color-picker>
+                <div class="hint">Primary color</div>
+            </div>
+            <div flex-gt-xs="33" flex>
+                <color-picker ng-model="vm.app.secondaryColor" color-picker-format="'hex'"></color-picker>
+                <div class="hint">Secondary color</div>
+            </div>
+            <div flex-gt-xs="33" flex>
+                <color-picker ng-model="vm.app.attentionColor" color-picker-format="'hex'"></color-picker>
+                <div class="hint">Attention color</div>
+            </div>
+        </div>
+        <div layout-xs="column" layout-gt-xs="row">
+            <md-input-container flex>
+                <label for="displayName">Display name</label>
+                <input type="text" id="displayName" ng-model="vm.app.displayName">
+                <!--<div class="hint">This will be displayed through out your app.</div>-->
+            </md-input-container>
+            <md-input-container flex>
+                <label for="tagline">Tagline</label>
+                <input type="text" id="tagline" ng-model="vm.app.tagline">
+                <!--<div class="hint">This will be displayed on the home view.</div>-->
+            </md-input-container>
+        </div>
+        <div layout-xs="column" layout-gt-xs="row" layout-align="start start">
+            <div layout="column" flex class="md-padding">
+                <div layout="row" flex>
+                    <md-button style="height: 20px;"
+                               id="backgroundImage"
+                               class="md-raised md-primary"
+                               aria-label="attach_file">
+                        Choose image
+                    </md-button>
+                    <md-input-container md-no-float>
+                        <label for="backgroundImage">Background image</label>
+                        <input id="textInput" ng-model="vm.app.imagePath" type="text" placeholder="No file chosen" ng-readonly="true">
+                    </md-input-container>
+                </div>
+                <h2 class="md-subhead">Marketing Messages</h2>
+                <text-angular ng-model="vm.app.marketingMessage"></text-angular>
+            </div>
+            <div flex-gt-xs="50">
+                <h2 class="md-subhead">App preview</h2>
+                <img src="assets/img/app-preview.png" style="width: 100%">
+            </div>
+        </div>
+        <div layout-xs="column" layout-gt-xs="row">
+
+        </div>
+        <div layout-xs="column" layout-gt-xs="row">
+        </div>
+    </md-card>
+</div>

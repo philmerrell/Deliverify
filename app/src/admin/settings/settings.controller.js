@@ -3,26 +3,32 @@
 
   angular
     .module('app.admin')
-    .controller('SettingsCtrl', SettingsCtrl);
+    .controller('SettingsCtrl', StoreInfoCtrl);
 
 
-  function SettingsCtrl($mdToast, AppService) {
+  function StoreInfoCtrl($mdToast, AppService) {
     var vm = this;
 
     AppService.setNavTitle('SETTINGS');
 
-    vm.app = {
-      displayName: 'Mealatron 9000',
-      tagline: 'The most advanced delivery sandwich ever'
+    vm.store = {
+      displayName: 'The Appwich 5000',
+      tagline: 'The most advanced delivery system ever',
+      address: '111 N. 11th St',
+      city: 'Boise',
+      state: 'Id',
+      zip: '83702',
+      email: 'hello@theappwich5000',
+      phone: '208-331-1734'
     };
 
-    vm.saveSettings = saveSettings;
+    vm.saveStoreInfo = saveStoreInfo;
 
 
-    function saveSettings(settings) {
+    function saveStoreInfo(storeInfo) {
       $mdToast.show(
         $mdToast.simple()
-          .textContent('Settings updated')
+          .textContent('Info saved')
           .position('bottom right')
           .hideDelay(3000)
       );

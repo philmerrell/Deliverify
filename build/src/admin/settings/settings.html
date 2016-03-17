@@ -1,21 +1,34 @@
 <div layout="row" layout-align="center center">
     <md-card style="max-width: 800px;" layout-padding flex>
-        <h2 class="md-subhead">Branding</h2>
-        <div layout-xs="column" layout-gt-xs="row">
-            <md-input-container flex-gt-xs="45" flex>
-                <label for="displayName">Display name</label>
-                <input type="text" id="displayName" ng-model="vm.store.displayName">
-                <div class="hint">This will be displayed through out your app.</div>
-            </md-input-container>
-            <md-input-container flex-gt-xs="65" flex>
-                <label for="tagline">Tagline</label>
-                <input type="text" id="tagline" ng-model="vm.store.tagline">
-                <div class="hint">This will be displayed on the home view.</div>
-            </md-input-container>
-        </div>
-        <div layout-xs="column" layout-gt-xs="row">
-
-        </div>
+        <md-list>
+            <md-list-item class="md-2-line" md-no-ink ui-sref="admin.branding">
+                <md-icon md-svg-src="assets/svg/branding_black.svg"></md-icon>
+                <div class="md-list-item-text" layout="column">
+                    <h3>Branding</h3>
+                    <p>Define your brand colors and marketing messages</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line" md-no-ink ui-sref="admin.contactInfo">
+                <md-icon md-svg-src="assets/svg/contact_black.svg"></md-icon>
+                <div class="md-list-item-text" layout="column">
+                    <h3>Store contact information</h3>
+                    <p>Configure how customers connect to you</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line" md-no-ink ui-sref="admin.zones">
+                <md-icon md-svg-src="assets/svg/car_black.svg"></md-icon>
+                <div class="md-list-item-text" layout="column">
+                    <h3>Delivery Map</h3>
+                    <p>Define your delivery zones</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line" md-no-ink ui-sref="admin.hours">
+                <md-icon md-svg-src="assets/svg/hours_black.svg"></md-icon>
+                <div class="md-list-item-text" layout="column">
+                    <h3>Delivery Hours</h3>
+                    <p>Establish hours your customers can order</p>
+                </div>
+            </md-list-item>
+        </md-list>
     </md-card>
 </div>
-

@@ -39,10 +39,6 @@
               templateUrl: 'src/admin/menu/menu.html',
               controller: 'MenuCtrl as vm'
             }
-            // "adminNav": {
-            //   templateUrl: 'src/admin/menu/menuItem.html',
-            //   controller: 'MenuItemCtrl as vm'
-            // }
           }
         })
         
@@ -56,31 +52,31 @@
           }
         })
         
-        .state('admin.storeInfo', {
-          url: '/info',
+        .state('admin.branding', {
+          url: '/settings/branding',
           views: {
             "admin": {
-              templateUrl: 'src/admin/storeInfo/storeInfo.html',
-              controller: 'StoreInfoCtrl as vm'
+              templateUrl: 'src/admin/settings/branding/branding.html',
+              controller: 'BrandingCtrl as vm'
             }
           }
         })
         
         .state('admin.hours', {
-          url: '/hours',
+          url: '/settings/hours',
           views: {
             "admin": {
-              templateUrl: 'src/admin/hours/hours.html',
+              templateUrl: 'src/admin/settings/hours/hours.html',
               controller: 'HoursCtrl as vm'
             }
           }
         })
         
         .state('admin.zones', {
-          url: '/zones',
+          url: '/settings/zones',
           views: {
             "admin": {
-              templateUrl: 'src/admin/delivery-zones/deliveryZones.html',
+              templateUrl: 'src/admin/settings/delivery-zones/deliveryZones.html',
               controller: 'DeliveryZonesCtrl as vm'
             }
           }
@@ -97,10 +93,10 @@
         })
 
         .state('admin.contactInfo', {
-          url: '/contact',
+          url: '/settings/contact',
           views: {
             "admin": {
-              templateUrl: 'src/admin/contactInfo/contactInfo.html',
+              templateUrl: 'src/admin/settings/contact-info/contactInfo.html',
               controller: 'ContactInfoCtrl as vm'
             }
           }
