@@ -44,22 +44,23 @@
         <md-button hide-gt-sm class="md-icon-button md-accent" aria-label="Close" ng-click="app.closeSidenav('left')">
           <md-icon md-svg-icon="./assets/svg/close_white.svg"></md-icon>
       	</md-button>
-        <h1 class="md-headline">Start your free 14-day trial</h1>
+        <h1 class="md-headline">Coming Soon</h1>
+        <p>Enter your email to be notified when free trials become available.</p>
         <form>
             <md-input-container style="width: 100%">
             <label for="testInput">Email address</label>
             <input type="text" id="testInput" ng-model="trial.email" md-autofocus>
             </md-input-container>
-            <md-input-container style="width: 100%">
-            <label for="password">Password</label>
-            <input type="password" id="password" ng-model="trial.password">
-            </md-input-container>
-            <md-input-container style="width: 100%">
-            <label for="storeName">Your store name</label>
-            <input type="text" id="storeName" ng-model="trial.storeName">
-            <p ng-if="trial.storeName" class="hint">https://<b>{{app.domainify(trial.storeName)}}</b>.deliverify.com</p>
-            </md-input-container>
-            <md-button ng-click="app.startFreeTrial(trial);" style="width: 100%" class="md-primary md-raised">Get started</md-button>
+            <!--<md-input-container style="width: 100%">-->
+            <!--<label for="password">Password</label>-->
+            <!--<input type="password" id="password" ng-model="trial.password">-->
+            <!--</md-input-container>-->
+            <!--<md-input-container style="width: 100%">-->
+            <!--<label for="storeName">Your store name</label>-->
+            <!--<input type="text" id="storeName" ng-model="trial.storeName">-->
+            <!--<p ng-if="trial.storeName" class="hint">https://<b>{{app.domainify(trial.storeName)}}</b>.deliverify.com</p>-->
+            <!--</md-input-container>-->
+            <md-button ng-click="app.startFreeTrial(trial);" style="width: 100%" class="md-primary md-raised">Submit</md-button>
         </form>
     </md-content>
     
