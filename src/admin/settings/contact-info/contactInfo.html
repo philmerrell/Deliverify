@@ -1,0 +1,57 @@
+<div layout="row" layout-align="center center">
+    <md-card style="max-width: 800px;" layout-padding flex>
+
+
+        <form class="free-trial">
+            <h2 class="md-subhead">General</h2>
+            <md-input-container style="width: 100%">
+                <label for="address">Store address</label>
+                <input type="text" id="address" ng-model="vm.store.address">
+            </md-input-container>
+            <md-input-container style="width: 100%">
+                <label for="address2">Apt, Suite, Etc...</label>
+                <input type="text" id="address2" ng-model="vm.store.address2">
+            </md-input-container>
+            <div layout-xs="column" layout-gt-xs="row">
+                <md-input-container flex-xs="30" flex>
+                    <label for="city">City</label>
+                    <input type="text" id="city" ng-model="vm.store.city">
+                </md-input-container>
+                <md-input-container flex-xs="30" flex>
+                    <label for="state">State</label>
+                    <input type="text" id="state" ng-model="vm.store.state">
+                </md-input-container>
+                <md-input-container flex-xs="30" flex>
+                    <label for="zip">Zip</label>
+                    <input type="text" id="zip" ng-model="vm.store.zip">
+                </md-input-container>
+            </div>
+            <div layout-xs="column" layout-gt-xs="row">
+                <md-input-container flex-xs="50" flex>
+                    <label for="storeEmail">Store email</label>
+                    <input type="text" id="storeEmail" ng-model="vm.store.email">
+                    <div class="hint">What email address can your customers contact you at?</div>
+                </md-input-container>
+                <md-input-container flex-xs="50" flex>
+                    <label for="storePhone">Store phone</label>
+                    <input type="text" id="storePhone" ng-model="vm.store.phone">
+                    <div class="hint">What number can your customers reach you at?</div>
+                </md-input-container>
+            </div>
+            <h2 class="md-subhead">Social</h2>
+            <div layout-xs="column" layout-gt-xs="row">
+                <md-input-container flex-xs="50" flex>
+                    <label for="facebook">Facebook</label>
+                    <input type="text" id="facebook" ng-model="store.facebook">
+                </md-input-container>
+                <md-input-container flex-xs="50" flex>
+                    <label for="twitter">Twitter</label>
+                    <input type="text" id="twitter" ng-model="store.twitter">
+                </md-input-container>
+            </div>
+
+
+            <md-button ng-click="vm.saveStoreInfo(store);" style="width: 100%" class="md-primary md-raised">Save Info</md-button>
+        </form>
+    </md-card>
+</div>
