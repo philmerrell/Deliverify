@@ -30,7 +30,7 @@
                                       <p>${{order.total}}</p>
                                   </div>
                                   <md-button ng-if="order.orderStatus === 'Order submitted'" ng-click="vm.acknowledgeOrder(order)" class="md-raised md-primary">Acknowledge</md-button>
-                                  <md-button ng-if="order.orderStatus === 'Acknowledged'" ng-click="vm.readyForDelivery(order)" class="md-raised md-secondary">Ready For Delivery</md-button>
+                                  <md-button ng-if="order.orderStatus === 'Acknowledged'" ng-click="vm.readyForDelivery(order)" class="md-raised md-accent">Ready For Delivery</md-button>
                                   <!--<md-button ng-if="order.orderStatus === 'Ready For Delivery'" ng-click="vm.enroute(order)">Ready For Delivery</md-button>-->
                               </md-list-item>
                               <md-list-item style="background: rgba(135,206,250, 0.1)" ng-if="order.orderStatus === 'Acknowledged'" ng-repeat="item in order.cart" class="md-3-line">
