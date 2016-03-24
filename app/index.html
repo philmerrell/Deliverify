@@ -40,7 +40,7 @@
       </md-toolbar>
       
           <!-- FREE TRIAL -->
-    <md-content ng-if="!app.userService.getCurrentUser();" class="trial-form" layout-padding>
+    <div ng-if="!app.userService.getCurrentUser();" class="trial-form" layout-padding>
         <md-button hide-gt-sm class="md-icon-button md-accent" aria-label="Close" ng-click="app.closeSidenav('left')">
           <md-icon md-svg-icon="./assets/svg/close_white.svg"></md-icon>
       	</md-button>
@@ -60,9 +60,9 @@
             <!--<input type="text" id="storeName" ng-model="trial.storeName">-->
             <!--<p ng-if="trial.storeName" class="hint">https://<b>{{app.domainify(trial.storeName)}}</b>.deliverify.com</p>-->
             <!--</md-input-container>-->
-            <md-button ng-click="app.startFreeTrial(trial);" style="width: 100%" class="md-primary md-raised">Submit</md-button>
+            <md-button ng-click="app.freeTrialInvite(email);" style="width: 100%" class="md-primary md-raised">Submit</md-button>
         </form>
-    </md-content>
+    </div>
     
     <!-- USER MENU -->
     <div ng-if="app.userService.getCurrentUser();">
@@ -110,7 +110,7 @@
               <h1 style="color: #666; font-size: 1.5em; font-weight: 100">{{app.appService.getNavTitle()}}</h1>
                
                 <span flex></span>
-                <md-button ng-if="app.appService.getNavActions()" ng-click="app.state.go(app.appService.getNavActions().state, app.appService.getNavActions().param)" class="md-raised md-primary">{{app.appService.getNavActions().title}}</md-button>
+                <a ng-if="app.appService.getNavActions()" ng-href="{{app.appService.getNavActions().url}}" class="md-button md-raised md-primary">{{app.appService.getNavActions().title}}</a>
                <!--<p class="header" style="color: #fff;">deliverify</p>-->
             </div>
         </md-toolbar>

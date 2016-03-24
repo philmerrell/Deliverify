@@ -9,20 +9,27 @@
   function StoreInfoCtrl($mdToast, AppService) {
     var vm = this;
 
-    AppService.setNavTitle('SETTINGS');
-
     vm.store = {
-      displayName: 'The Appwich 5000',
+      displayName: 'Joe\'s Sandwiches',
       tagline: 'The most advanced delivery system ever',
       address: '111 N. 11th St',
       city: 'Boise',
       state: 'Id',
       zip: '83702',
-      email: 'hello@theappwich5000',
+      email: 'hello@joessandwiches.com',
       phone: '208-331-1734'
     };
 
     vm.saveStoreInfo = saveStoreInfo;
+
+    activate();
+
+    ////////////////////////////////////////////
+
+    function activate() {
+      AppService.setNavTitle('SETTINGS');
+      AppService.setNavActions({url: 'http://philmerrell.github.io/deliver-client/', title: 'View app'});
+    }
 
 
     function saveStoreInfo(storeInfo) {

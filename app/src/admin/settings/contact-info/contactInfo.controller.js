@@ -9,8 +9,6 @@
   function ContactInfoCtrl($mdToast, $state, AppService) {
     var vm = this;
 
-    AppService.setNavTitle('CONTACT INFO');
-
     vm.store = {
       address: '111 N. 11th St',
       city: 'Boise',
@@ -22,6 +20,15 @@
 
     vm.saveStoreInfo = saveStoreInfo;
 
+    activate();
+
+    ////////////////////////////////////
+
+    function activate() {
+      AppService.setNavTitle('CONTACT INFO');
+      AppService.setNavActions({url: 'http://philmerrell.github.io/deliver-client/', title: 'View app'});
+    }
+
 
     function saveStoreInfo(storeInfo) {
       $mdToast.show(
@@ -31,7 +38,7 @@
           .hideDelay(3000)
       );
 
-      $state.go('admin.storeInfo');
+      $state.go('admin.settings');
     }
   }
 })();

@@ -10,5 +10,6 @@
     var vm = this;
 
     AppService.setNavTitle('ACCOUNT');
+    AppService.setNavActions(false);
   }
 })();

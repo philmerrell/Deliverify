@@ -5,12 +5,13 @@
     .module('app')
     .controller('AppCtrl', AppCtrl);
   
-  function AppCtrl($mdMedia, $mdSidenav, $state, AppService, UserService) {
+  function AppCtrl($mdMedia, $mdSidenav, $mdToast, $state, AppService, UserService) {
     var vm = this;
     
     vm.closeSidenav = closeSidenav;
     vm.state = $state;
     vm.go = go;
+    vm.freeTrialInvite = freeTrialInvite;
     vm.startFreeTrial = startFreeTrial;
     vm.openSidenav = openSidenav;
     vm.userService = UserService;
@@ -36,6 +37,16 @@
     
     function closeSidenav(side) {
       $mdSidenav(side).close();
+    }
+
+    function freeTrialInvite(email) {
+      closeSidenav('left');
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent('You\'re all signed up!')
+          .position('bottom right')
+          .hideDelay(3000)
+      );
     }
     
     function go(state) {

@@ -29,7 +29,7 @@
 
     function activate() {
       AppService.setNavTitle('BRANDING');
-      AppService.setNavActions({state: 'admin.menuItem', param: {name: 'new'}, title: 'View app'});
+      AppService.setNavActions({url: 'http://philmerrell.github.io/deliver-client/', title: 'View app'});
     }
 
     function saveSettings(settings) {
