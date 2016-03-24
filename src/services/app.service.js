@@ -20,7 +20,7 @@
         getFreeTrialInfo: getFreeTrialInfo,
         setFreeTrialInfo: setFreeTrialInfo
         
-      }
+      };
       
       function getNavTitle() {
         return navTitle;

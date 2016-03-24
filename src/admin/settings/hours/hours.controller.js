@@ -6,7 +6,7 @@
     .controller('HoursCtrl', HoursCtrl)
   ;
   
-  function HoursCtrl(AppService) {
+  function HoursCtrl($mdToast, AppService) {
     var vm = this;
     vm.addHours = addHours;
     vm.removeHours = removeHours;
@@ -25,7 +25,7 @@
 
     function setNavActions() {
       AppService.setNavTitle('HOURS');
-      AppService.setNavActions({state: 'admin.menuItem', param: {name: 'new'}, title: 'Add hours'});
+      AppService.setNavActions({url: 'http://philmerrell.github.io/deliver-client/', title: 'View app'});
     }
 
 
@@ -33,11 +33,24 @@
       vm.hours.push(hours);
       vm.newHours = {};
 
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent('hours saved')
+          .position('bottom right')
+          .hideDelay(3000)
+      );
+
     }
 
     function removeHours(hour) {
       console.log(hour);
       _.pull(vm.hours, hour);
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent('hours removed')
+          .position('bottom right')
+          .hideDelay(3000)
+      );
     }
 
     function loadHours() {

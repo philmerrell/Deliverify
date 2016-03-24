@@ -62,7 +62,7 @@
       
       function setNavActions() {
         AppService.setNavTitle('MENU');
-        AppService.setNavActions({state: 'admin.menuItem', param: {name: 'new'}, title: 'Add item'});
+        AppService.setNavActions({url: '#/admin/menu/new?store=demo', title: 'Add item'});
       }
       
       $scope.$on('$destroy', function(){
