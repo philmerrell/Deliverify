@@ -2,6 +2,8 @@
   <div layout="column" layout-align="center center">
   <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
     <ui-gmap-drawing-manager options="vm.drawingManagerOptions" control="vm.drawingManagerControl"></ui-gmap-drawing-manager>
+    <ui-gmap-polygon path="vm.zone">
+    </ui-gmap-polygon>
   </ui-gmap-google-map>
   </div>
 </div>
