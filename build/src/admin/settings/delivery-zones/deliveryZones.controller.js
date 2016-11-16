@@ -61,7 +61,7 @@
       ////////////////////////////////////
 
       function activate() {
-        AppService.setNavTitle('DELIVERY ZONES');
+        AppService.setNavTitle('DELIVERY MAP');
         AppService.setNavActions({url: 'http://philmerrell.github.io/deliver-client/', title: 'View app'});
       }
 
