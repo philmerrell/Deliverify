@@ -5,7 +5,7 @@
     .module('app')
     .controller('AppCtrl', AppCtrl);
   
-  function AppCtrl($mdMedia, $mdSidenav, $mdToast, $state, AppService, UserService) {
+  function AppCtrl($mdMedia, $mdSidenav, $mdToast, $state, AppService, UserService, StoreService) {
     var vm = this;
     
     vm.closeSidenav = closeSidenav;
@@ -80,7 +80,7 @@
     
     function shouldLockOpen() {
       $state.current.name
-      if($mdMedia('gt-sm') && UserService.getCurrentUser()) {
+      if($mdMedia('gt-sm') && StoreService.getStoreRef()) {
         return true;
       } else {
         return false;

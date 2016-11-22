@@ -7,10 +7,20 @@
 <div layout="row" layout-align="center center">
     <div style="max-width: 800px;">
       <md-card style="margin-top: -75px;">
+        <md-card-header>
+          <md-card-avatar>
+            <img ng-src="{{app.currentUser.photoURL}}" class="md-user-avatar" alt="You">
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">{{app.currentUser.displayName}}</span>
+            <span class="md-subhead">{{app.currentUser.email}}</span>
+          </md-card-header-text>
+        </md-card-header>
         <md-card-title>
-          <h2 style="margin-top: 0;" class="md-headline">Add info about your restaurant</h2>
+          <h2 style="margin-top: 0;" class="md-headline">What name would you like your customers to see?</h2>
         </md-card-title>
         <md-card-content>
+          <!--<pre>{{app.currentUser | json }}</pre>-->
           <form class="free-trial">
             <!--<div layout-xs="column" layout-gt-xs="row">
               <md-input-container flex-xs="50" flex>
@@ -26,7 +36,7 @@
               <label for="storeName">Store name</label>
               <input type="text" id="storeName" ng-model="vm.store.name">
             </md-input-container>
-            <md-input-container style="width: 100%">
+            <!--<md-input-container style="width: 100%">
               <label for="address">Street address</label>
               <input type="text" id="address" ng-model="vm.store.address">
             </md-input-container>
@@ -52,7 +62,7 @@
               <md-input-container style="width: 100%">
                 <label for="phone">Phone</label>
                 <input type="text" id="phone" ng-model="vm.store.phone">
-              </md-input-container>
+              </md-input-container>-->
               <md-button ng-click="vm.createTrialUser();" style="width: 100%" class="md-primary md-raised">Create your store</md-button>
           </form>
         </md-card-content>

@@ -46,24 +46,8 @@
         <md-button hide-gt-sm class="md-icon-button md-accent" aria-label="Close" ng-click="app.closeSidenav('left')">
           <md-icon md-svg-icon="./assets/svg/close_white.svg"></md-icon>
       	</md-button>
-        <!--<h1 class="md-headline">Coming Soon</h1>
-        <p>Enter your email to be notified when free trials become available.</p>-->
         <form>
             <md-button ng-click="app.signInWithGoogle()" class="md-primary md-raised">Google</md-button> 
-            <!--<md-input-container style="width: 100%">
-                <label for="testInput">Email address</label>
-                <input type="text" id="testInput" ng-model="trial.email" md-autofocus>
-            </md-input-container>
-            <md-input-container style="width: 100%">
-                <label for="password">Password</label>
-                <input type="password" id="password" ng-model="trial.password">
-            </md-input-container>
-            <md-input-container style="width: 100%">
-                <label for="storeName">Your store name</label>
-                <input type="text" id="storeName" ng-model="trial.storeName">
-                <p ng-if="trial.storeName" class="hint">https://<b>{{app.domainify(trial.storeName)}}</b>.deliverify.com</p>
-            </md-input-container>-->
-            <!--<md-button ng-click="app.startFreeTrial(trial);" style="width: 100%" class="md-primary md-raised">Submit</md-button>-->
         </form>
     </div>
     
@@ -71,17 +55,17 @@
     <div ng-if="app.userService.getCurrentUser();">
       <div layout="column" class="md-toolbar-tools md-toolbar-tools-bottom">
           <h2 class="md-subhead">
-            Joe's Sandwiches
+            {{}}
           </h2>
           <span flex></span>
           <!--<md-button ng-click="app.go('admin.settings')" class="md-fab md-primary md-mini">-->
               <!--<md-tooltip md-direction="top">Modify your app</md-tooltip>-->
               <!--<md-icon md-svg-src="assets/svg/settings-white.svg"></md-icon>-->
           <!--</md-button>-->
-          <md-button href="http://philmerrell.github.io/deliver-client/" target="_blank" class="md-fab md-secondary md-mini">
+          <!--<md-button href="http://philmerrell.github.io/deliver-client/" target="_blank" class="md-fab md-secondary md-mini">
               <md-tooltip md-direction="top">Preview your app</md-tooltip>
               <md-icon md-svg-src="assets/svg/preview-white.svg"></md-icon>
-          </md-button>
+          </md-button>-->
           <!--<md-button class="md-secondary">Preview <md-icon md-svg-src="assets/svg/preview-white.svg"></md-icon></md-button>-->
           <!--<span style="margin-right: 10px;"></span>-->
         </div>
@@ -113,8 +97,35 @@
               <h1 style="color: #666; font-size: 1.5em; font-weight: 100">{{app.appService.getNavTitle()}}</h1>
                
                 <span flex></span>
-                <a ng-if="app.appService.getNavActions()" ng-href="{{app.appService.getNavActions().url}}" class="md-button md-raised md-primary">{{app.appService.getNavActions().title}}</a>
+                <!--<a ng-if="app.appService.getNavActions()" ng-href="{{app.appService.getNavActions().url}}" class="md-button md-raised md-primary">{{app.appService.getNavActions().title}}</a>-->
                <!--<p class="header" style="color: #fff;">deliverify</p>-->
+               <md-menu md-position-mode="target-right target" >
+                    <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                        <img ng-src="{{app.currentUser.photoURL}}" width="100%" style="border-radius: 50%" alt="You">
+                    </md-button>
+                    <md-menu-content width="4" >
+                        <div style="padding: 10px;">
+                            <h5 style="margin: 0;">{{app.currentUser.displayName}}</h5>
+                            <span class="md-caption">{{app.currentUser.email}}</span>
+                        </div>
+                        <md-menu-item>
+                            <md-button ng-click="ctrl.announceClick($index)">
+                                <div layout="row" flex>
+                                    <p flex>Sign out</p>
+                                    <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
+                                </div>
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="ctrl.announceClick($index)">
+                                <div layout="row" flex>
+                                    <p flex>Feedback</p>
+                                    <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
+                                </div>
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
             </div>
         </md-toolbar>
         <md-content layout="column" flex>
@@ -153,13 +164,13 @@
     <script src="src/free-trial-form/freeTrialForm.controller.js"></script>
     <script src="src/home/home.controller.js"></script>
     <script src="src/admin/account/account.controller.js"></script>
-    <script src="src/admin/orders/orders.controller.js"></script>
     <script src="src/admin/menu/menu.controller.js"></script>
     <script src="src/admin/menu/menuItem.controller.js"></script>
     <script src="src/admin/settings/settings.controller.js"></script>
+    <script src="src/admin/orders/orders.controller.js"></script>
     <script src="src/admin/settings/branding/branding.controller.js"></script>
-    <script src="src/admin/settings/contact-info/contactInfo.controller.js"></script>
     <script src="src/admin/settings/delivery-zones/deliveryZones.controller.js"></script>
+    <script src="src/admin/settings/contact-info/contactInfo.controller.js"></script>
     <script src="src/admin/settings/hours/hours.controller.js"></script>
     <!-- endinject -->
 
