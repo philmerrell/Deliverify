@@ -8,7 +8,6 @@
   function AppCtrl($mdMedia, $mdSidenav, $mdToast, $state, AppService, UserService) {
     var vm = this;
     
-    // vm.authObj = $firebaseAuth();
     vm.closeSidenav = closeSidenav;
     vm.state = $state;
     vm.go = go;
@@ -22,15 +21,15 @@
     
     // TODO: move into seperate component for free trial form
     vm.domainify = domainify;
+
+    vm.currentUser = {};
     
     activate();
     
     /////////////////////////////
     
     
-    function activate() {
-      // console.log('Auth: ', vm.authObj);
-    }
+    function activate() {}
     
     function domainify(storeName) {
       var domain = storeName.replace(/\s+/g, '-');
@@ -66,6 +65,10 @@
       UserService.signInWithGoogle()
         .then(function(result){
           console.log('Controller: ', result);
+          vm.currentUser = result.user;
+          go('freeTrialForm');
+        }).catch(function(error) {
+          console.log('Error: ', error);
         });
     }
     

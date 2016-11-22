@@ -5,10 +5,10 @@
     .module('app.admin')
     .service('StoreService', StoreService);
     
-    function StoreService($firebaseArray, $state) {
+    function StoreService($firebaseArray, $state, UserService) {
       var storeId = '';
       var storeRef;
-      var ref = firebase.database().ref();
+      var ref = firebase.database().ref('stores/' + UserService.getCurrentUser().uid);
 
 
       var service = {
@@ -19,8 +19,7 @@
         getReadyForDeliveryOrders     : getReadyForDeliveryOrders,
         getStoreId                    : getStoreId,
         setStoreId                    : setStoreId,
-        getStoreRef                   : getStoreRef,
-        setStoreRef                   : setStoreRef
+        getStoreRef                   : getStoreRef
         //updateDeliveryStatusToEnroute : updateDeliveryStatusToEnroute
       };
       
@@ -28,10 +27,11 @@
       
       ////////////////////////////////////////////////
       
-      function createNewStore(freeTrialInfo) {
-        var store = ref.push(freeTrialInfo);
+      function createNewStore(storeInfo) {
+        // console.log('Ref: ', ref);
+        var store = ref.set({storeInfo: storeInfo});
         
-        return store.key();
+        // return store.key();
       }
       
       
@@ -91,7 +91,6 @@
       
       function setStoreObj(id) {
         var storeRef = $firebaseObject(ref);
-        s
       }
       
       function getStoreRef() {
