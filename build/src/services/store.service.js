@@ -8,8 +8,7 @@
     function StoreService($firebaseArray, $state) {
       var storeId = '';
       var storeRef;
-      var firebase = new Firebase("https://deliverify-phil.firebaseio.com/stores/");
-      var ref = new Firebase("https://philmerrell.firebaseio.com/orders/");
+      var ref = firebase.database().ref();
 
 
       var service = {
@@ -30,7 +29,7 @@
       ////////////////////////////////////////////////
       
       function createNewStore(freeTrialInfo) {
-        var store = firebase.push(freeTrialInfo);
+        var store = ref.push(freeTrialInfo);
         
         return store.key();
       }
@@ -68,10 +67,7 @@
         
         if(storeId === 'demo') {
           return $firebaseArray(ref.orderByChild("progress").equalTo("Ordered"));
-        } else {
-
-        }
-        
+        } else {}
       }
 
       function getReadyForDeliveryOrders() {
@@ -89,12 +85,13 @@
       
       function setStoreId(id) {
         storeId = id;
-        service.setStoreRef(storeId);
+        // service.setStoreObj(storeId);
         return storeId;
       }
       
-      function setStoreRef(id) {
-        var storeRef = new Firebase("https://deliverify-phil.firebaseio.com/stores/"+id);
+      function setStoreObj(id) {
+        var storeRef = $firebaseObject(ref);
+        s
       }
       
       function getStoreRef() {

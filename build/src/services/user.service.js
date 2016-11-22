@@ -6,13 +6,15 @@
     .factory('UserService', UserService);
    
     
-    function UserService() {
+    function UserService($firebaseAuth) {
       
       var currentUser = false;
+      var authObj = $firebaseAuth();
       
       return {
-        getCurrentUser: getCurrentUser,
-        setCurrentUser: setCurrentUser
+        getCurrentUser    : getCurrentUser,
+        setCurrentUser    : setCurrentUser,
+        signInWithGoogle  : signInWithGoogle
       }
       
       function getCurrentUser() {
@@ -23,6 +25,21 @@
         currentUser = user;
         return currentUser;
       }
+
+      function signInWithGoogle() {
+        var provider = new firebase.auth.GoogleAuthProvider();
+        provider.addScope('profile');
+        
+        return authObj.$signInWithPopup(provider)
+          .then(function(result) {
+            console.log("Signed in as:", result.user);
+            return result;
+          })
+          .catch(function(error) {
+            console.error("Authentication failed:", error);
+            return error;
+        });
+    }
       
     }
 })();
