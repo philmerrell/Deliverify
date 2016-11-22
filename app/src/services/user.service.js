@@ -23,6 +23,7 @@
       
       function setCurrentUser(user) {
         currentUser = user;
+        console.log('Current User Set: ', user);
         return currentUser;
       }
 
@@ -33,6 +34,8 @@
         return authObj.$signInWithPopup(provider)
           .then(function(result) {
             console.log("Signed in as:", result.user);
+            setCurrentUser(result.user);
+            // currentUser = result.user;
             return result;
           })
           .catch(function(error) {

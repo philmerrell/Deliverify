@@ -8,18 +8,19 @@
     function FreeTrialFormCtrl($state, AppService, StoreService, UserService) {
       var vm = this;
       vm.createTrialUser = createTrialUser;
+      vm.store = {};
       
       
       //////////////////////////
       
       
-      function createTrialUser(trialUser) {
-        var trialInfo = AppService.getFreeTrialInfo();
-        console.log(trialInfo);
-        trialInfo.contact = trialUser;
-        UserService.setCurrentUser(trialInfo);
-        var storeId = StoreService.createNewStore(trialInfo);
-        $state.go('admin.orders', {store: storeId});
+      function createTrialUser() {
+        // var trialInfo = AppService.getFreeTrialInfo();
+        // console.log(trialInfo);
+        // trialInfo.contact = trialUser;
+        // UserService.setCurrentUser(trialInfo);
+        var storeId = StoreService.createNewStore(vm.store);
+        $state.go('admin.orders', { store: storeId });
       }
     }
 })();

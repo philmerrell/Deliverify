@@ -29,9 +29,9 @@
       function activate() {
         AppService.setNavTitle('ORDERS');
         AppService.setNavActions(false);
-        getIncomingOrders();
-        getReadyForDeliveryOrders();
-        getEnrouteDeliveryOrders();
+        // getIncomingOrders();
+        // getReadyForDeliveryOrders();
+        // getEnrouteDeliveryOrders();
       }
       
       function getIncomingOrders() {
