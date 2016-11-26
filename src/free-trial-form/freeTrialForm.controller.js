@@ -5,24 +5,16 @@
     .module('app.freeTrialForm')
     .controller('FreeTrialFormCtrl', FreeTrialFormCtrl);
     
-    function FreeTrialFormCtrl($state, AppService, StoreService, UserService) {
+    function FreeTrialFormCtrl($state, AppService, StoreService, UserService, currentAuth) {
       var vm = this;
       vm.createTrialUser = createTrialUser;
-      vm.store = {};
-      
+      vm.storeName = null;
       
       //////////////////////////
       
-      
       function createTrialUser() {
-        // var trialInfo = AppService.getFreeTrialInfo();
-        // console.log(trialInfo);
-        // trialInfo.contact = trialUser;
-        // UserService.setCurrentUser(trialInfo);
-        StoreService.setStoreRef(UserService.getCurrentUser().uid);
-
-        var storeId = StoreService.createNewStore(vm.store);
-        $state.go('admin.orders', { store: storeId });
+        StoreService.createNewStore(vm.storeName);
+        $state.go('admin.menu');
       }
     }
 })();
