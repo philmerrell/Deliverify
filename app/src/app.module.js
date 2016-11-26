@@ -25,6 +25,19 @@
         v: '3.23', //defaults to latest 3.X anyhow
         libraries: 'geometry,drawing'
       });
+    })
+    
+    .run(function($rootScope, $state) {
+      $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+        if (error === "AUTH_REQUIRED") {
+          $state.go("home");
+        }
+
+        if (error === "USER_LOGGED_IN") {
+          console.log(error);
+          $state.go('admin.menu');
+        }
+      });
     });
 
 })();

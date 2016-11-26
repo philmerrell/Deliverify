@@ -1,7 +1,6 @@
 <div class="hero-container" style="height: 150px; background-image: url(assets/img/bg4.png); background-size: cover;">
     <div class="hero-container-content">
         <h1 class="header" style="font-size: 2.5em; margin-top: 0; color: #fff; text-shadow: 2px 2px 0 #000;">deliverify</h1>
-        <!--<md-button flex ng-click="vm.openFreeTrial()" class="md-accent md-raised">Start your free trial</md-button>-->
     </div>
 </div>
 <div layout="row" layout-align="center center">
@@ -20,50 +19,12 @@
           <h2 style="margin-top: 0;" class="md-headline">What name would you like your customers to see?</h2>
         </md-card-title>
         <md-card-content>
-          <!--<pre>{{app.currentUser | json }}</pre>-->
           <form class="free-trial">
-            <!--<div layout-xs="column" layout-gt-xs="row">
-              <md-input-container flex-xs="50" flex>
-                <label for="firstName">First name</label>
-                <input type="text" id="firstName" ng-model="trial.firstName">
-              </md-input-container>
-              <md-input-container flex-xs="50" flex>
-                <label for="lastName">Last name</label>
-                <input type="text" id="lastName" ng-model="trial.lastName">
-              </md-input-container>
-            </div>-->
             <md-input-container style="width: 100%">
               <label for="storeName">Store name</label>
-              <input type="text" id="storeName" ng-model="vm.store.name">
+              <input type="text" id="storeName" ng-model="vm.storeName">
             </md-input-container>
-            <!--<md-input-container style="width: 100%">
-              <label for="address">Street address</label>
-              <input type="text" id="address" ng-model="vm.store.address">
-            </md-input-container>
-            <md-input-container style="width: 100%">
-              <label for="address2">Apt, Suite, Etc...</label>
-              <input type="text" id="address2" ng-model="vm.store.address2">
-            </md-input-container>
-            <div layout-xs="column" layout-gt-xs="row">
-              <md-input-container flex-xs="40" flex>
-                <label for="city">City</label>
-                <input type="text" id="city" ng-model="vm.store.city">
-              </md-input-container>
-              <md-input-container flex-xs="30" flex>
-                <label for="state">State</label>
-                <input type="text" id="state" ng-model="vm.store.state">
-              </md-input-container>
-              <md-input-container flex-xs="30" flex>
-                <label for="zip">Zip</label>
-                <input type="text" id="zip" ng-model="vm.store.zip">
-              </md-input-container>
-            </div>
-            
-              <md-input-container style="width: 100%">
-                <label for="phone">Phone</label>
-                <input type="text" id="phone" ng-model="vm.store.phone">
-              </md-input-container>-->
-              <md-button ng-click="vm.createTrialUser();" style="width: 100%" class="md-primary md-raised">Create your store</md-button>
+            <md-button ng-click="vm.createTrialUser();" style="width: 100%" class="md-primary md-raised">Create your store</md-button>
           </form>
         </md-card-content>
       </md-card>

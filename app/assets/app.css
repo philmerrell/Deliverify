@@ -42,7 +42,11 @@ body {
 }
   
 md-content {
-    background: #EEEEEE;
+    background: #eceff1;
+}
+
+.md-subheader {
+    background: #fff;
 }
 
 .md-input-container {

@@ -8,8 +8,14 @@
     
     function MenuCtrl($mdToast, $scope, $state, $mdSidenav, AppService, MenuService) {
       var vm = this;
+
+      vm.menuItems = MenuService.getMenuItems();
+
+      console.log(vm.menuItems);
+
+      var menuCategories;
       
-      vm.items = _.groupBy(MenuService.getMenuItems(), 'Group');
+      vm.items = _.groupBy([], 'Group');
       vm.editMenuItem = editMenuItem;
       vm.addMenuItem = addMenuItem;
       vm.addCategoryName = addCategoryName;
@@ -33,7 +39,6 @@
       
       function addMenuItem() {
         MenuService.setMenuItem(false);
-        
         // openSidenav();
         $state.go('admin.menuItem');
         
@@ -62,7 +67,7 @@
       
       function setNavActions() {
         AppService.setNavTitle('MENU');
-        AppService.setNavActions({url: '#/admin/menu/new?store=demo', title: 'Add item'});
+        // AppService.setNavActions({url: '#/admin/menu/new?store=demo', title: 'Add item'});
       }
       
       $scope.$on('$destroy', function(){

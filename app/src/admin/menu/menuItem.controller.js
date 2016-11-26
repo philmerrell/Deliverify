@@ -5,14 +5,16 @@
     .module('app.admin')
     .controller('MenuItemCtrl', MenuItemCtrl);
     
-    function MenuItemCtrl($mdDialog, $mdToast, $scope, $state, MenuService, AppService) {
+    function MenuItemCtrl($mdDialog, $mdToast, $scope, $state, StoreService, AppService, MenuService) {
       var vm = this;
       vm.menuService = MenuService;
       
       vm.deleteMenuItem = deleteMenuItem;
       vm.saveMenuItem = saveMenuItem;
       vm.transformIngredientChip = transformIngredientChip;
-      AppService.setNavTitle('MENU')
+      AppService.setNavTitle('MENU');
+
+      var menuItems = StoreService.getMenuItems();
       
       activate();
       
@@ -59,7 +61,8 @@
       }
       
       function saveMenuItem(item) {
-        MenuService.addMenuItems(item);
+        // MenuService.addMenuItems(item);
+        menuItems.$add(item);
         console.log(item);
       
         showToast('Menu item saved');

@@ -6,13 +6,7 @@
     .controller('AdminCtrl', AdminCtrl);
     
     
-    function AdminCtrl($location, StoreService) {
+    function AdminCtrl() {
       var vm = this;
-      
-      var urlParams = $location.search();
-      
-      StoreService.setStoreId(urlParams.store);
-
-      
     }
 })();

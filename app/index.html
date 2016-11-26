@@ -42,7 +42,7 @@
       </md-toolbar>
       
           <!-- FREE TRIAL -->
-    <div ng-if="!app.userService.getCurrentUser();" class="trial-form" layout-padding>
+    <div ng-if="!app.currentUser" class="trial-form" layout-padding>
         <md-button hide-gt-sm class="md-icon-button md-accent" aria-label="Close" ng-click="app.closeSidenav('left')">
           <md-icon md-svg-icon="./assets/svg/close_white.svg"></md-icon>
       	</md-button>
@@ -52,33 +52,31 @@
     </div>
     
     <!-- USER MENU -->
-    <div ng-if="app.userService.getCurrentUser();">
-      <div layout="column" class="md-toolbar-tools md-toolbar-tools-bottom">
+    <div ng-if="app.currentUser">
+      <div class="md-toolbar-tools md-toolbar-tools-bottom">
           <h2 class="md-subhead">
-            {{}}
+            {{app.store.branding.name}}
           </h2>
-          <span flex></span>
-          <!--<md-button ng-click="app.go('admin.settings')" class="md-fab md-primary md-mini">-->
-              <!--<md-tooltip md-direction="top">Modify your app</md-tooltip>-->
-              <!--<md-icon md-svg-src="assets/svg/settings-white.svg"></md-icon>-->
-          <!--</md-button>-->
-          <!--<md-button href="http://philmerrell.github.io/deliver-client/" target="_blank" class="md-fab md-secondary md-mini">
-              <md-tooltip md-direction="top">Preview your app</md-tooltip>
-              <md-icon md-svg-src="assets/svg/preview-white.svg"></md-icon>
-          </md-button>-->
-          <!--<md-button class="md-secondary">Preview <md-icon md-svg-src="assets/svg/preview-white.svg"></md-icon></md-button>-->
-          <!--<span style="margin-right: 10px;"></span>-->
         </div>
+        <!--<md-divider></md-divider>
+        <md-button ng-click="app.go('admin.orders')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/store_black.svg"></md-icon> Orders</md-button>-->
         <md-divider></md-divider>
-        <md-button ng-click="app.go('admin.orders')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/store_black.svg"></md-icon> Orders</md-button>
+        <md-button ng-click="app.go('admin.menu')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;">
+            <md-icon md-svg-icon="assets/svg/menu_black.svg"></md-icon> Menu
+        </md-button>
         <md-divider></md-divider>
-        <md-button ng-click="app.go('admin.menu')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/menu_black.svg"></md-icon> Menu</md-button>
+        <md-button ng-click="app.go('admin.branding')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;">
+            <md-icon md-svg-src="assets/svg/branding_black.svg"></md-icon> Branding
+        </md-button>
         <md-divider></md-divider>
-        <md-button ng-click="app.go('admin.settings')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/settings_black.svg"></md-icon> Settings</md-button>
+        <md-button ng-click="app.go('admin.contactInfo')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;">
+            <md-icon md-svg-src="assets/svg/contact_black.svg"></md-icon> Contact Info
+        </md-button>
         <md-divider></md-divider>
-        <md-button ng-click="app.go('admin.account')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;"><md-icon md-svg-icon="assets/svg/account_black.svg"></md-icon> Account</md-button>
+        <md-button ng-click="app.go('admin.hours')" class="md-primary" style="height: 50px; width: 100%; border-radius: 0px; text-align: left; margin: 0; padding-left: 20px; font-size: 1em;">
+            <md-icon md-svg-src="assets/svg/hours_black.svg"></md-icon> Business Hours
+        </md-button>
         <md-divider></md-divider>
-
     </div>
       
     </md-sidenav>
@@ -91,7 +89,7 @@
     <div layout="column" flex style="">
         <md-toolbar ng-if="app.state.current.name !== 'home' && app.state.current.name !== 'freeTrialForm'" style="background: #f8f8f8;" class="md-whiteframe-z1">
             <div class="md-toolbar-tools">
-              <md-button hide-gt-sm ng-click="app.openSidenav('left')" ng-if="app.userService.getCurrentUser()" class="md-icon-button md-accent" aria-label="Close" >
+              <md-button hide-gt-sm ng-click="app.openSidenav('left')" ng-if="app.currentUser" class="md-icon-button md-accent" aria-label="Close" >
                   <md-icon md-svg-icon="assets/svg/menu.svg"></md-icon>
               </md-button>
               <h1 style="color: #666; font-size: 1.5em; font-weight: 100">{{app.appService.getNavTitle()}}</h1>
@@ -109,7 +107,7 @@
                             <span class="md-caption">{{app.currentUser.email}}</span>
                         </div>
                         <md-menu-item>
-                            <md-button ng-click="ctrl.announceClick($index)">
+                            <md-button ng-click="app.signOut()">
                                 <div layout="row" flex>
                                     <p flex>Sign out</p>
                                     <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
@@ -117,7 +115,7 @@
                             </md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button ng-click="ctrl.announceClick($index)">
+                            <md-button ng-click="app.signOut()">
                                 <div layout="row" flex>
                                     <p flex>Feedback</p>
                                     <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>

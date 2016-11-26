@@ -6,18 +6,11 @@
     .controller('ContactInfoCtrl', ContactInfoCtrl);
 
 
-  function ContactInfoCtrl($mdToast, $state, AppService) {
+  function ContactInfoCtrl($mdToast, $state, AppService, StoreService) {
     var vm = this;
 
-    vm.store = {
-      address: '111 N. 11th St',
-      city: 'Boise',
-      state: 'Id',
-      zip: '83702',
-      email: 'hello@mealatron9000.com',
-      phone: '208-331-1734'
-    };
-
+    
+    vm.info = StoreService.getStoreInfo();
     vm.saveStoreInfo = saveStoreInfo;
 
     activate();
@@ -26,11 +19,12 @@
 
     function activate() {
       AppService.setNavTitle('CONTACT INFO');
-      AppService.setNavActions({url: 'http://philmerrell.github.io/deliver-client/', title: 'View app'});
+      // AppService.setNavActions({url: 'http://philmerrell.github.io/deliver-client/', title: 'View app'});
     }
 
 
-    function saveStoreInfo(storeInfo) {
+    function saveStoreInfo() {
+      StoreService.saveStore(vm.info);
       $mdToast.show(
         $mdToast.simple()
           .textContent('Info saved')

@@ -14,8 +14,12 @@
             templateUrl: 'src/home/home.html',
             controller: 'HomeCtrl as vm'
           }
+        },
+        resolve: {
+          "currentAuth": ["UserService", function(UserService) {
+            return UserService.getAuthObj().$waitForSignIn();
+          }]
         }
       });
-  }  
-    
+  }
 })();

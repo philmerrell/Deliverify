@@ -5,41 +5,58 @@
     .module('app.admin')
     .service('StoreService', StoreService);
     
-    function StoreService($firebaseArray, $state) {
-      var storeId = '';
-      var storeRef;
+    function StoreService($firebaseArray, $firebaseObject, $state) {
       var ref = null;
-
+      var storeObj = null;
 
       var service = {
-        createNewStore                : createNewStore,
-        getDemoStore                  : getDemoStore,
-        getEnrouteDeliveryOrders      : getEnrouteDeliveryOrders,
-        getIncomingOrders             : getIncomingOrders,
-        getReadyForDeliveryOrders     : getReadyForDeliveryOrders,
-        getStoreId                    : getStoreId,
-        setStoreId                    : setStoreId,
-        getStoreRef                   : getStoreRef,
-        setStoreRef                   : setStoreRef
-        //updateDeliveryStatusToEnroute : updateDeliveryStatusToEnroute
+        createNewStore  : createNewStore,
+        saveStore       : saveStore,
+        getStoreBranding: getStoreBranding,
+        getStoreInfo    : getStoreInfo,
+        getDemoStore    : getDemoStore,
+        getStoreRef     : getStoreRef,
+        setStoreRef     : setStoreRef,
+        getStoreObj     : getStoreObj
       };
       
       return service;
       
       ////////////////////////////////////////////////
       
-      function createNewStore(storeInfo) {
-        var store = ref.set({storeInfo: storeInfo});
+      function createNewStore(storeName) {
+        var store = {
+          branding: {
+            name: storeName
+          }
+        };
+        var store = ref.set(store);
       }
-      
-      
+
+      function saveStore(store) {
+        store.$save().then(function(ref) {
+          ref.key === obj.$id; // true
+        }, function(error) {
+          console.log("Error:", error);
+        });
+      }
+
+      function getStoreInfo() {
+        return $firebaseObject(ref.child('info'));
+      }
+
+      function getStoreBranding() {
+        return $firebaseObject(ref.child('branding'));
+      }
+
       function getDemoStore() {
         
         return {
-          storeInfo: {
-            displayName: 'The Appwich 5000',
+          info: {
+            name: 'The Appwich 5000',
             tagline: 'The most advanced delivery system ever',
             address: '111 N. 11th St',
+            address2: '',
             city: 'Boise',
             state: 'Id',
             zip: '83702',
@@ -56,35 +73,21 @@
                     
         }
       }
-      
-      function getMenuItems() {
+
+      // function getIncomingOrders() {
         
-      }
+      //   if(storeId === 'demo') {
+      //     return $firebaseArray(ref.orderByChild("progress").equalTo("Ordered"));
+      //   } else {}
+      // }
 
-      function getIncomingOrders() {
-        
-        if(storeId === 'demo') {
-          return $firebaseArray(ref.orderByChild("progress").equalTo("Ordered"));
-        } else {}
-      }
+      // function getReadyForDeliveryOrders() {
+      //   return $firebaseArray(ref.orderByChild("progress").equalTo("Made"));
+      // }
 
-      function getReadyForDeliveryOrders() {
-        return $firebaseArray(ref.orderByChild("progress").equalTo("Made"));
-      }
-
-      function getEnrouteDeliveryOrders() {
-        return $firebaseArray(ref.orderByChild("progress").equalTo("Delivering"));
-      }
-      
-      function getStoreId() {
-        return storeId;
-      }
-      
-      function setStoreId(id) {
-        storeId = id;
-        // service.setStoreObj(storeId);
-        return storeId;
-      }
+      // function getEnrouteDeliveryOrders() {
+      //   return $firebaseArray(ref.orderByChild("progress").equalTo("Delivering"));
+      // }
       
       function setStoreObj(id) {
         var storeRef = $firebaseObject(ref);
@@ -96,6 +99,11 @@
       
       function getStoreRef() {
         return ref;
+      }
+
+      function getStoreObj() {
+        storeObj = $firebaseObject(ref);
+        return storeObj;
       }
 
       //function updateDeliveryStatusToEnroute(order) {
