@@ -61,7 +61,7 @@
               </md-chip-template>
             </md-chips>
             <md-button ng-click="vm.saveMenuItem(vm.menuItem);" style="width: 100%" class="md-primary md-raised">Save Item</md-button>
-            <md-button ng-if="vm.menuItem" ng-click="vm.deleteMenuItem(vm.menuItem, $event);" style="width: 100%" class="md-warn">Delete</md-button>
+            <md-button ng-if="vm.menuItem.$id" ng-click="vm.deleteMenuItem(vm.menuItem, $event);" style="width: 100%" class="md-warn">Delete</md-button>
           </form>
         </md-card-content>
        </md-card>
