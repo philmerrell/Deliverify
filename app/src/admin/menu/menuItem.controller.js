@@ -44,7 +44,9 @@
           .cancel('Cancel');
           
           $mdDialog.show(confirm).then(function() {
-            _.pull(MenuService.getMenuItems(), item);
+            // _.pull(MenuService.getMenuItems(), item);
+            console.log(item);
+            MenuService.removeMenuItem(item);
             showToast('Menu item removed')
             $state.go('admin.menu');
           }, function() {
@@ -63,8 +65,7 @@
       }
       
       function saveMenuItem(item) {
-        // MenuService.addMenuItems(item);
-        menuItems.$add(item);
+        MenuService.addMenuItems(item);
         console.log(item);
       
         showToast('Menu item saved');

@@ -7,6 +7,10 @@
 
     function MenuService($firebaseArray) {
         var ref = null;
+        var menuItemsRef = null;
+        var menuItems = null;
+        var menuCategoriesRef = null;
+        var menuCategories = null;
 
         var menuItem = {
             Ingredients: []
@@ -18,6 +22,7 @@
             addMenuCategory: addMenuCategory,
             getMenuCategories: getMenuCategories,
             removeMenuCategory: removeMenuCategory,
+            removeMenuItem: removeMenuItem,
             getMenuItem: getMenuItem,
             setMenuItem: setMenuItem,
             setMenuRef: setMenuRef
@@ -30,17 +35,27 @@
         }
 
         function getMenuCategories() {
-            var menuItemsRef = ref.child("categories");
-            var menuItems = $firebaseArray(menuItemsRef);
-            return menuItems;
+            if(menuCategoriesRef) {
+                return menuCategories;
+            } else {
+                menuCategoriesRef = ref.child("categories");
+                menuCategories = $firebaseArray(menuCategoriesRef);
+                return menuCategories;
+            }
         }
 
         function removeMenuCategory(category) {
-            getMenuCategories().$remove(category)
+            getMenuCategories().$remove(category);
+        }
+
+        function removeMenuItem(item) {
+            getMenuItems().$remove(item).then(function(r) {
+                console.log(r);
+            });
         }
 
         function addMenuItems(item) {
-            items.push(item);
+            getMenuItems().$add(item);
         }
 
         function getMenuItem() {
@@ -57,9 +72,14 @@
         }
 
         function getMenuItems() {
-            var menuItemsRef = ref.child("items");
-            var menuItems = $firebaseArray(menuItemsRef);
-            return menuItems;
+            if(menuItemsRef) {
+                return menuItems;
+            } else {
+                menuItemsRef = ref.child("items");
+                menuItems = $firebaseArray(menuItemsRef);
+                return menuItems;
+            }
+            
         }
     }
 
