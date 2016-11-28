@@ -28,7 +28,7 @@
       $mdToast.show(
         $mdToast.simple()
           .textContent('Settings updated')
-          .position('bottom right')
+          .position('top right')
           .hideDelay(3000)
       );
     }
