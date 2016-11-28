@@ -12,6 +12,8 @@
       vm.deleteMenuItem = deleteMenuItem;
       vm.saveMenuItem = saveMenuItem;
       vm.transformIngredientChip = transformIngredientChip;
+      vm.menuCategories = MenuService.getMenuCategories();
+
       AppService.setNavTitle('MENU');
 
       var menuItems = MenuService.getMenuItems();
@@ -36,13 +38,15 @@
         var confirm = $mdDialog.confirm()
           .title('Are you sure you want to delete this item?')
           .textContent('This item will be removed from your menu.')
-          .ariaLabel('Lucky day')
+          .ariaLabel('Delete menu item?')
           .targetEvent(ev)
           .ok('Delete')
           .cancel('Cancel');
           
           $mdDialog.show(confirm).then(function() {
-            _.pull(MenuService.getMenuItems(), item);
+            // _.pull(MenuService.getMenuItems(), item);
+            console.log(item);
+            MenuService.removeMenuItem(item);
             showToast('Menu item removed')
             $state.go('admin.menu');
           }, function() {
@@ -61,8 +65,7 @@
       }
       
       function saveMenuItem(item) {
-        // MenuService.addMenuItems(item);
-        menuItems.$add(item);
+        MenuService.addMenuItems(item);
         console.log(item);
       
         showToast('Menu item saved');
