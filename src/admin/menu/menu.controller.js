@@ -6,23 +6,19 @@
     .controller('MenuCtrl', MenuCtrl);
     
     
-    function MenuCtrl($mdToast, $scope, $state, $mdSidenav, AppService, MenuService) {
+    function MenuCtrl($mdToast, $q, $scope, $state, $mdSidenav, AppService, MenuService) {
+
       var vm = this;
-
-      vm.menuItems = MenuService.getMenuItems();
-      vm.menuCategories = MenuService.getMenuCategories();
-
-      console.log(vm.menuItems);
-
-      var menuCategories;
       
-      vm.items = _.groupBy([], 'Group');
+      vm.dataLoaded = false;
+      vm.menuCategories = {};
+      vm.menuHasItems = false;
+      vm.menuItems = {};
       vm.category = { name: '' };
       vm.editMenuItem = editMenuItem;
       vm.addMenuItem = addMenuItem;
       vm.addCategoryName = addCategoryName;
       vm.removeCategory = removeCategory;
-      vm.categories = MenuService.getMenuCategories();
       
       activate();
       
@@ -30,6 +26,11 @@
       
       function activate() {
         setNavActions();
+        var promises = [getMenuItems(), getMenuCategories()];
+        return $q.all(promises).then(function() {
+          vm.dataLoaded = true;
+        });
+        
       }
       
       function editMenuItem(event, item) {
@@ -52,9 +53,25 @@
         $mdToast.show(
           $mdToast.simple()
             .textContent('Category added')
-            .position('bottom right')
+            .position('top right')
             .hideDelay(3000)
         );
+      }
+
+      function getMenuItems() {
+        return MenuService.getMenuItems().$loaded()
+          .then(function(items) {
+            vm.menuItems = _.groupBy(items, 'category.name');
+            vm.menuHasItems = _.some(vm.menuItems);
+            console.log(vm.menuItems);
+          });
+      }
+
+      function getMenuCategories() {
+        return MenuService.getMenuCategories().$loaded()
+          .then(function(categories) {
+            vm.menuCategories = categories;
+          });
       }
       
       function removeCategory(category) {
@@ -62,7 +79,7 @@
         $mdToast.show(
           $mdToast.simple()
             .textContent('Category removed')
-            .position('bottom right')
+            .position('top right')
             .hideDelay(3000)
         );
       }
