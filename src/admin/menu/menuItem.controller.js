@@ -14,7 +14,7 @@
       vm.transformIngredientChip = transformIngredientChip;
       AppService.setNavTitle('MENU');
 
-      var menuItems = StoreService.getMenuItems();
+      var menuItems = MenuService.getMenuItems();
       
       activate();
       
