@@ -28,11 +28,10 @@
       $mdToast.show(
         $mdToast.simple()
           .textContent('Info saved')
-          .position('bottom right')
+          .position('top right')
           .hideDelay(3000)
       );
 
-      $state.go('admin.settings');
     }
   }
 })();
