@@ -1,4 +1,4 @@
-<div class="hero-container" style="min-height: 200px; background-image: url({{vm.menuItem.Image}}); background-position: center; background-size: cover;">
+<div class="hero-container" style="min-height: 200px; background-image: url({{vm.menuItem.image}}); background-position: center; background-size: cover;">
     <div class="hero-container-content">
       <h2 ng-if="!vm.menuItem" style="margin-top: 0;" class="md-headline">Add an image</h2>
     </div>
@@ -19,48 +19,43 @@
             <!--<aps-upload-file></aps-upload-file>-->
             <md-input-container style="width: 100%">
                 <label for="name">Item name</label>
-                <input md-autofocus type="text" id="name" ng-model="vm.menuItem.Name">
+                <input md-autofocus type="text" id="name" ng-model="vm.menuItem.name">
             </md-input-container>
             <div style="width: 100%" layout-xs="column" layout-gt-xs="row">
               
               <md-input-container flex>
                 <label for="price">Price</label>
-                <input type="text" id="price" ng-model="vm.menuItem.Price">
+                <input type="text" id="price" ng-model="vm.menuItem.price">
               </md-input-container>
               <md-input-container flex>
               <label>Category</label>
-                <md-select ng-model="vm.menuItem.Group">
-                  <md-option value="Sandwiches">
-                    Sandwiches
-                  </md-option>
-                  <md-option value="Drinks">
-                    Drinks
-                  </md-option>
+                <md-select ng-model="vm.menuItem.category">
+                  <md-option ng-value="opt" ng-repeat="opt in vm.menuCategories">{{opt.name}}</md-option>
               </md-select>
             </md-input-container>
             </div>
             <md-input-container class="md-block">
               <label>Description</label>
-              <textarea ng-model="vm.menuItem.Description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+              <textarea ng-model="vm.menuItem.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
             </md-input-container>
             
             <md-subheader class="md-no-sticky">Ingredients</md-subheader>
           
             
-            <md-chips ng-model="vm.menuItem.Ingredients" md-autocomplete-snap
+            <md-chips ng-model="vm.menuItem.ingredients" md-autocomplete-snap
               md-transform-chip="vm.transformIngredientChip($chip)"
               md-require-match="false">
               <md-autocomplete
                   md-selected-item="vm.selectedIngredient"
                   md-search-text="vm.searchText"
                   md-items="item in vm.ingredientSearch(vm.searchText)"
-                  md-item-text="item.Name"
+                  md-item-text="item.name"
                   placeholder="Add an ingredient">
                 <span md-highlight-text="ctrl.searchText">{{item.name}} :: {{item.type}}</span>
               </md-autocomplete>
               <md-chip-template>
                 <span>
-                  <strong>{{$chip.Name}}</strong>
+                  <strong>{{$chip.name}}</strong>
                   <!--<em>({{$chip.type}})</em>-->
                 </span>
               </md-chip-template>
