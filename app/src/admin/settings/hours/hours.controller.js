@@ -6,12 +6,12 @@
     .controller('HoursCtrl', HoursCtrl)
   ;
   
-  function HoursCtrl($mdToast, AppService) {
+  function HoursCtrl($mdToast, AppService, StoreService) {
     var vm = this;
     vm.addHours = addHours;
     vm.removeHours = removeHours;
 
-    vm.hours = [];
+    vm.hours = StoreService.getStoreHours();
     vm.newHours = {};
     
     ///////////////////////////////////////////////
@@ -20,17 +20,18 @@
 
     function activate() {
       setNavActions();
-      loadHours();
+      // loadHours();
     }
 
     function setNavActions() {
       AppService.setNavTitle('HOURS');
-      AppService.setNavActions({url: 'http://philmerrell.github.io/deliver-client/', title: 'View app'});
+      // AppService.setNavActions({url: 'http://philmerrell.github.io/deliver-client/', title: 'View app'});
     }
 
 
     function addHours(hours) {
-      vm.hours.push(hours);
+      StoreService.addStoreHours(hours);
+      // vm.hours.push(hours);
       vm.newHours = {};
 
       $mdToast.show(
@@ -42,9 +43,8 @@
 
     }
 
-    function removeHours(hour) {
-      console.log(hour);
-      _.pull(vm.hours, hour);
+    function removeHours(hours) {
+      StoreService.removeStoreHours(hours);
       $mdToast.show(
         $mdToast.simple()
           .textContent('hours removed')

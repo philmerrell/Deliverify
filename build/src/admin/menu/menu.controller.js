@@ -10,17 +10,19 @@
       var vm = this;
 
       vm.menuItems = MenuService.getMenuItems();
+      vm.menuCategories = MenuService.getMenuCategories();
 
       console.log(vm.menuItems);
 
       var menuCategories;
       
       vm.items = _.groupBy([], 'Group');
+      vm.category = { name: '' };
       vm.editMenuItem = editMenuItem;
       vm.addMenuItem = addMenuItem;
       vm.addCategoryName = addCategoryName;
       vm.removeCategory = removeCategory;
-      vm.categories = ["Sandwiches", "Drinks"];
+      vm.categories = MenuService.getMenuCategories();
       
       activate();
       
@@ -44,9 +46,9 @@
         
       }
       
-      function addCategoryName(name) {
-        vm.categories.push(name);
-        vm.categoryName = '';
+      function addCategoryName() {
+        MenuService.addMenuCategory(vm.category);
+        vm.category.name = '';
         $mdToast.show(
           $mdToast.simple()
             .textContent('Category added')
@@ -56,7 +58,7 @@
       }
       
       function removeCategory(category) {
-        _.pull(vm.categories, category);
+        MenuService.removeMenuCategory(category);
         $mdToast.show(
           $mdToast.simple()
             .textContent('Category removed')
@@ -68,6 +70,10 @@
       function setNavActions() {
         AppService.setNavTitle('MENU');
         // AppService.setNavActions({url: '#/admin/menu/new?store=demo', title: 'Add item'});
+      }
+
+      function showAddCategoryModal() {
+
       }
       
       $scope.$on('$destroy', function(){

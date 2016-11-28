@@ -15,12 +15,29 @@
         var service = {
             addMenuItems: addMenuItems,
             getMenuItems: getMenuItems,
+            addMenuCategory: addMenuCategory,
+            getMenuCategories: getMenuCategories,
+            removeMenuCategory: removeMenuCategory,
             getMenuItem: getMenuItem,
             setMenuItem: setMenuItem,
             setMenuRef: setMenuRef
         };
 
         return service;
+
+        function addMenuCategory(category) {
+            getMenuCategories().$add(category);
+        }
+
+        function getMenuCategories() {
+            var menuItemsRef = ref.child("categories");
+            var menuItems = $firebaseArray(menuItemsRef);
+            return menuItems;
+        }
+
+        function removeMenuCategory(category) {
+            getMenuCategories().$remove(category)
+        }
 
         function addMenuItems(item) {
             items.push(item);
@@ -31,7 +48,7 @@
         }
 
         function setMenuRef(uid) {
-            ref = firebase.database().ref('menus/' + uid);
+            ref = firebase.database().ref('stores/' + uid + '/menu');
         }
 
         function setMenuItem(item) {

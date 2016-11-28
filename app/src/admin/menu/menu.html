@@ -17,22 +17,39 @@
             <md-card class="">
               <md-card-header style="background: #f5f5f5; border-bottom: 1px solid #eee; padding-top: 0; padding-bottom: 0;">
                 <span flex></span>
-                <md-button class="md-raised md-primary" ui-sref="admin.menuItem({name: 'new'})">Add Item</md-button>
+                <md-button ng-if="vm.menuCategories.length" class="md-raised md-primary" ui-sref="admin.menuItem({name: 'new'})">Add Item</md-button>
               </md-card-header>
                   <md-card-content>
                     <!--<div ng-if="vm.items.length" ng-repeat="(key, value) in vm.items">
                       <md-subheader class="md-primary md-no-sticky">{{key}}</md-subheader>-->
                       <md-list>
                         <md-divider></md-divider>
-                        <md-list-item ng-repeat="item in vm.menuItems track by $index" class="secondary-button-padding" ng-click="">
+                        <md-list-item ng-repeat="item in vm.menuItems track by $index" class="secondary-button-padding">
                           <p>{{item.Name}}</p>
                           <md-button class="md-primary" ng-click="vm.editMenuItem($event, item)">Edit</md-button>
                           <md-divider></md-divider>
                         </md-list-item>
                       </md-list>
                     <!--</div>-->
-                    <div ng-if="!vm.items.length">
-                      <h1 class="md-headline">You need menu items.</h1>
+                    <div>
+                      <h1 ng-if="!vm.items.length && vm.menuCategories.length" class="md-headline">You need menu items.</h1>
+                      <div ng-if="!vm.menuCategories.length">
+                        <h1 class="md-headline">Get started by adding a menu category.</h1>
+                        <form name="categoryForm">
+                          <md-input-container class="md-block" flex-gt-sm>
+                            <label>Category name</label>
+                            <input md-maxlength="30" required name="name" ng-model="vm.category.name" />
+
+                            <div class="hint">E.g., Drinks, Sandwiches, Desserts etc...</div>
+
+                            <div ng-messages="categoryForm.name.$error" >
+                              <!--<div ng-message="required">At least one category is required.</div>-->
+                              <!--<div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>-->
+                            </div>
+                          </md-input-container>
+                          <md-button ng-click="vm.addCategoryName()" class="md-primary md-raised">Add a category</md-button>
+                        </form>
+                      </div>
                     </div>
                 </md-card-content>
           </md-card>
@@ -46,7 +63,6 @@
                  <md-card-content>
                   <form ng-submit="vm.addCategoryName(vm.categoryName)">
                    <div layout="row">
-
                       <md-input-container style="width: 100%">
                           <label for="categoryName">Add a category</label>
                           <input type="text" id="categoryName" ng-model="vm.categoryName">
@@ -57,9 +73,9 @@
                   </form>
                    
                   <md-list>
-                    <md-list-item class="secondary-button-padding" ng-repeat="name in vm.categories">
-                      <p>{{name}}</p>
-                      <md-button class="md-warn" ng-click="vm.removeCategory(name)">delete</md-button>
+                    <md-list-item class="secondary-button-padding" ng-repeat="category in vm.categories">
+                      <p>{{category.name}}</p>
+                      <md-button class="md-warn" ng-click="vm.removeCategory(category)">delete</md-button>
                     </md-list-item>
                   </md-list>
                  </md-card-content>

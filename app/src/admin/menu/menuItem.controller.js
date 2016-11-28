@@ -12,9 +12,11 @@
       vm.deleteMenuItem = deleteMenuItem;
       vm.saveMenuItem = saveMenuItem;
       vm.transformIngredientChip = transformIngredientChip;
+      vm.menuCategories = MenuService.getMenuCategories();
+
       AppService.setNavTitle('MENU');
 
-      var menuItems = StoreService.getMenuItems();
+      var menuItems = MenuService.getMenuItems();
       
       activate();
       
@@ -36,7 +38,7 @@
         var confirm = $mdDialog.confirm()
           .title('Are you sure you want to delete this item?')
           .textContent('This item will be removed from your menu.')
-          .ariaLabel('Lucky day')
+          .ariaLabel('Delete menu item?')
           .targetEvent(ev)
           .ok('Delete')
           .cancel('Cancel');

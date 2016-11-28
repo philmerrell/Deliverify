@@ -10,9 +10,12 @@
       var storeObj = null;
 
       var service = {
+        addStoreHours   : addStoreHours,
+        removeStoreHours  : removeStoreHours,
         createNewStore  : createNewStore,
         saveStore       : saveStore,
         getStoreBranding: getStoreBranding,
+        getStoreHours   : getStoreHours,
         getStoreInfo    : getStoreInfo,
         getDemoStore    : getDemoStore,
         getStoreRef     : getStoreRef,
@@ -41,12 +44,24 @@
         });
       }
 
+      function addStoreHours(hours) {
+        getStoreHours().$add(hours);
+      }
+
+      function removeStoreHours(hours) {
+        getStoreHours().$remove(hours);
+      }
+
       function getStoreInfo() {
         return $firebaseObject(ref.child('info'));
       }
 
       function getStoreBranding() {
         return $firebaseObject(ref.child('branding'));
+      }
+
+      function getStoreHours() {
+        return $firebaseArray(ref.child('hours'));
       }
 
       function getDemoStore() {
