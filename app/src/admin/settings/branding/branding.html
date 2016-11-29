@@ -28,6 +28,11 @@
                     <div class="hint">Attention color</div>
                 </div>
             </div>
+            <div layout-xs="column" layout-gt-xs="row" md-padding>
+                <input class="ng-hide" id="input-file-id" type="file" onchange="angular.element(this).scope().vm.fileChanged(this)"/>
+                <label for="input-file-id" class="md-button md-raised md-primary">Choose an image</label>
+            </div>
+
             <md-button ng-click="vm.saveStoreInfo()" style="width: 100%" class="md-primary md-raised">Save</md-button>
 
             <!--<div layout-xs="column" layout-gt-xs="row" layout-align="start start">

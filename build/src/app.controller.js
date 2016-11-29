@@ -5,7 +5,7 @@
     .module('app')
     .controller('AppCtrl', AppCtrl);
   
-  function AppCtrl($mdMedia, $mdSidenav, $mdToast, $state, AppService, UserService, StoreService, MenuService) {
+  function AppCtrl($mdMedia, $mdSidenav, $mdToast, $state, AppService, UserService, StoreService, MenuService, UploadService) {
     var vm = this;
     
     vm.closeSidenav = closeSidenav;
@@ -37,6 +37,7 @@
             vm.currentUser = user;
             StoreService.setStoreRef(user.uid);
             MenuService.setMenuRef(user.uid);
+            UploadService.setStorageRef(user.uid);
             vm.store = StoreService.getStoreObj();
           }
           
@@ -77,6 +78,7 @@
           var user = result.user;
             vm.currentUser = user;
             StoreService.setStoreRef(user.uid);
+            UploadService.setStorageRef(user.uid);
             vm.store = StoreService.getStoreObj();
             navigateAfterSignIn();
           
@@ -102,7 +104,7 @@
     
     function shouldLockOpen() {
       $state.current.name
-      if($mdMedia('gt-sm') && vm.currentUser && vm.store.branding) {
+      if($mdMedia('gt-sm') && vm.currentUser && vm.store.branding.name) {
         return true;
       } else {
         return false;

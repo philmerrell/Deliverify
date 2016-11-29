@@ -5,7 +5,7 @@
         .module('app.services')
         .factory('MenuService', MenuService);
 
-    function MenuService($firebaseArray) {
+    function MenuService($firebaseArray, $q) {
         var ref = null;
         var menuItemsRef = null;
         var menuItems = null;
@@ -79,7 +79,6 @@
                 menuItems = $firebaseArray(menuItemsRef);
                 return menuItems;
             }
-            
         }
     }
 
