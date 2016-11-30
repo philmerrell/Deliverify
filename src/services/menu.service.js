@@ -1,3 +1,6 @@
+/**
+ * TODO: Save Menu Item rather than add...
+ * */
 (function () {
     'use strict';
 
@@ -5,7 +8,7 @@
         .module('app.services')
         .factory('MenuService', MenuService);
 
-    function MenuService($firebaseArray, $q) {
+    function MenuService($firebaseArray) {
         var ref = null;
         var menuItemsRef = null;
         var menuItems = null;
@@ -17,15 +20,16 @@
         };
 
         var service = {
-            addMenuItems: addMenuItems,
-            getMenuItems: getMenuItems,
-            addMenuCategory: addMenuCategory,
-            getMenuCategories: getMenuCategories,
-            removeMenuCategory: removeMenuCategory,
-            removeMenuItem: removeMenuItem,
-            getMenuItem: getMenuItem,
-            setMenuItem: setMenuItem,
-            setMenuRef: setMenuRef
+            addMenuItem         : addMenuItem,
+            getMenuItems        : getMenuItems,
+            addMenuCategory     : addMenuCategory,
+            getMenuCategories   : getMenuCategories,
+            removeMenuCategory  : removeMenuCategory,
+            removeMenuItem      : removeMenuItem,
+            getMenuItem         : getMenuItem,
+            saveMenuItem        : saveMenuItem,
+            setMenuItem         : setMenuItem,
+            setMenuRef          : setMenuRef
         };
 
         return service;
@@ -54,12 +58,16 @@
             });
         }
 
-        function addMenuItems(item) {
+        function addMenuItem(item) {
             getMenuItems().$add(item);
         }
 
         function getMenuItem() {
             return menuItem;
+        }
+
+        function saveMenuItem(item) {
+            getMenuItems().$save(item);
         }
 
         function setMenuRef(uid) {

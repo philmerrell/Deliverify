@@ -10,23 +10,29 @@
         .module('app.services')
         .factory('UploadService', UploadService);
 
-    function UploadService() {
+    function UploadService($q) {
       var storage = null;
+      var storageRef = null;
 
       return {
+        deleteImage         : deleteImage,
         setStorageRef       : setStorageRef,
-        uploadImage         : uploadImage,
-        uploadMenuItemImage : uploadMenuItemImage
+        uploadImage         : uploadImage
       }
 
       function setStorageRef(uid) {
-        storage = firebase.storage().ref('stores/' + uid + '/');
+        storage = firebase.storage();
+        storageRef = storage.ref('stores/' + uid + '/');
       }
 
-      function uploadImage(file) {
-        console.log(file);
+      function deleteImage(url) {          
+          var oldImageRef = storage.refFromURL(url);
+          return oldImageRef.delete();
+      }
+
+      function uploadImage(file, path) {
         var deferred = $q.defer();
-        var uploadTask = storage.child('brand/' + file.name).put(file, { contentType: file.type });
+        var uploadTask = storageRef.child(path + file.name).put(file, { contentType: file.type });
 
         // Listen for state changes, errors, and completion of the upload.
         uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
@@ -65,4 +71,4 @@
       }
     }
 
-});
+})();
