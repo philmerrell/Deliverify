@@ -103,8 +103,8 @@
     }
     
     function shouldLockOpen() {
-      $state.current.name
-      if($mdMedia('gt-sm') && vm.currentUser && vm.store.branding.name) {
+      // $state.current.name
+      if($mdMedia('gt-sm') && vm.currentUser && vm.store.branding) {
         return true;
       } else {
         return false;

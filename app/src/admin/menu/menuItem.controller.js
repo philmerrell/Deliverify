@@ -5,11 +5,12 @@
     .module('app.admin')
     .controller('MenuItemCtrl', MenuItemCtrl);
     
-    function MenuItemCtrl($mdDialog, $mdToast, $scope, $state, StoreService, AppService, MenuService) {
+    function MenuItemCtrl($mdDialog, $mdToast, $scope, $state, StoreService, AppService, MenuService, UploadService) {
       var vm = this;
       vm.menuService = MenuService;
       
       vm.deleteMenuItem = deleteMenuItem;
+      vm.fileChanged = fileChanged;
       vm.saveMenuItem = saveMenuItem;
       vm.transformIngredientChip = transformIngredientChip;
       vm.menuCategories = MenuService.getMenuCategories();
@@ -64,10 +65,16 @@
         return { Name: ingredient, type: 'new' }
       }
       
+      /**
+       * TODO: Fix save vs add */
       function saveMenuItem(item) {
-        MenuService.addMenuItems(item);
-        console.log(item);
-      
+
+        if(item.$id) {
+          MenuService.saveMenuItem(item);
+        } else {
+          MenuService.addMenuItem(item);      
+        }
+
         showToast('Menu item saved');
         $state.go('admin.menu');
       }
@@ -80,6 +87,31 @@
             .hideDelay(3000)
         );
       }
+
+      function fileChanged(el) {
+        var file = el.files[0];
+        if(vm.menuItem.image) {
+          deleteImage().then(function() {
+            uploadImage(file);
+          });
+        } else {
+          uploadImage(file);
+        }
+      }
+
+    function uploadImage(file) {
+      return UploadService.uploadImage(file, 'menu/')
+        .then(function(imageURL) {
+          vm.menuItem.image = {
+            fileName: file.name,
+            url: imageURL
+          };
+        });
+    }
+
+    function deleteImage() {
+      return UploadService.deleteImage(vm.menuItem.image.url);
+    }
       
     }
 })();

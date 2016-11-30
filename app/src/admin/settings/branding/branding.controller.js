@@ -26,10 +26,30 @@
 
     function fileChanged(el) {
       var file = el.files[0];
-      UploadService.uploadImage(file)
-        .then(function(imageURL) {
-          console.log(imageURL);
+      console.log(file);
+      if(vm.branding.image) {
+        deleteImage().then(function() {
+          uploadImage(file);
         });
+      } else {
+        uploadImage(file);
+      }
+      
+      
+    }
+
+    function uploadImage(file) {
+      return UploadService.uploadImage(file, 'brand/')
+        .then(function(imageURL) {
+          vm.branding.image = {
+            fileName: file.name,
+            url: imageURL
+          };
+        });
+    }
+
+    function deleteImage() {
+      return UploadService.deleteImage(vm.branding.image.url);
     }
 
     function saveStoreInfo() {

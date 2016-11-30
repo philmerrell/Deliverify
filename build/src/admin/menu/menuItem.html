@@ -1,4 +1,4 @@
-<div class="hero-container" style="min-height: 200px; background-image: url({{vm.menuItem.image}}); background-position: center; background-size: cover;">
+<div class="hero-container" style="min-height: 200px; background-image: url({{vm.menuItem.image.url}}); background-position: center; background-size: cover;">
     <div class="hero-container-content">
       <h2 ng-if="!vm.menuItem" style="margin-top: 0;" class="md-headline">Add an image</h2>
     </div>
@@ -8,7 +8,11 @@
        <md-card>
          <div layout="row">
            <span flex></span>
-             <md-button style="margin-top: -30px;" ng-click="vm.addImage()" class="md-fab md-fab-secondary"><md-icon md-svg-icon="assets/svg/add-photo_white.svg"></md-icon><md-tooltip md-direction="top">Add photo</md-tooltip></md-button>
+           <input class="ng-hide" id="input-file-id" type="file" onchange="angular.element(this).scope().vm.fileChanged(this)"/>
+            <label style="margin-top: -30px;" for="input-file-id" class="md-button md-fab md-fab-secondary">
+              <md-icon md-svg-icon="assets/svg/add-photo_white.svg"></md-icon>
+              <md-tooltip md-direction="top">Add photo</md-tooltip>
+            </label>
          </div>
         <!--<md-card-title ng-if="!vm.menuItem">
           <h2 style="margin-top: 0;" class="md-headline">Add new menu item</h2>

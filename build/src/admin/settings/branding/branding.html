@@ -28,9 +28,14 @@
                     <div class="hint">Attention color</div>
                 </div>
             </div>
-            <div layout-xs="column" layout-gt-xs="row" md-padding>
+            <div layout-xs="column" layout-gt-xs="row">
                 <input class="ng-hide" id="input-file-id" type="file" onchange="angular.element(this).scope().vm.fileChanged(this)"/>
                 <label for="input-file-id" class="md-button md-raised md-primary">Choose an image</label>
+                <div>{{vm.branding.image.fileName}}</div>
+            </div>
+            <div>
+                <h4>Image Preview</h4>
+                <img ng-src="{{vm.branding.image.url}}" width="100%">
             </div>
 
             <md-button ng-click="vm.saveStoreInfo()" style="width: 100%" class="md-primary md-raised">Save</md-button>
