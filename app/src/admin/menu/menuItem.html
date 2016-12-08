@@ -19,27 +19,46 @@
         </md-card-title>-->
         <md-card-content>
           <form class="admin-menu-item">
-            
-            <!--<aps-upload-file></aps-upload-file>-->
-            <md-input-container style="width: 100%">
-                <label for="name">Item name</label>
-                <input md-autofocus type="text" id="name" ng-model="vm.menuItem.name">
-            </md-input-container>
+            <div style="width: 100%" layout-xs="column" layout-gt-xs="row">
+              <md-input-container>
+                    <label for="name">Item name</label>
+                    <input md-autofocus type="text" id="name" ng-model="vm.menuItem.name">
+                </md-input-container>
+                <md-input-container flex>
+                  <label>Category</label>
+                  <md-select ng-model="vm.menuItem.category">
+                    <md-option ng-value="opt" ng-repeat="opt in vm.menuCategories">{{opt.name}}</md-option>
+                  </md-select>
+                </md-input-container>
+            </div>
             <div style="width: 100%" layout-xs="column" layout-gt-xs="row">
               
               <md-input-container flex>
-                <label for="price">Price</label>
-                <input type="text" id="price" ng-model="vm.menuItem.price">
+                <label for="costDescription">Cost Description</label>
+                <input type="text" id="costDescription" ng-model="vm.costInput.description">
+                <div class="hint">E.g., 1/2 Sandwich, 10" Pizza, etc..</div>
               </md-input-container>
               <md-input-container flex>
-              <label>Category</label>
-                <md-select ng-model="vm.menuItem.category">
-                  <md-option ng-value="opt" ng-repeat="opt in vm.menuCategories">{{opt.name}}</md-option>
-              </md-select>
-            </md-input-container>
+                <label for="costDescription">Price</label>
+                <input type="number" id="costPrice" ng-model="vm.costInput.cost">
+              </md-input-container>
+              <md-button ng-click="vm.addCost()" style="height: 20px;">Add Cost</md-button>
+
             </div>
+            <div ng-if="vm.menuItem.prices.length">
+              <md-subheader class="md-primary md-no-sticky">Prices</md-subheader>
+              <md-list>
+                <md-divider></md-divider>
+                <md-list-item ng-repeat="item in vm.menuItem.prices" class="secondary-button-padding">
+                  <p>{{item.description}} {{item.cost | currency }}</p>
+                  <md-button class="md-danger" ng-click="vm.deleteCost(item)">Delete</md-button>
+                  <md-divider></md-divider>
+                </md-list-item>
+              </md-list>
+            </div>
+
             <md-input-container class="md-block">
-              <label>Description</label>
+              <label>Item Description</label>
               <textarea ng-model="vm.menuItem.description" rows="5" md-select-on-focus></textarea>
             </md-input-container>
             

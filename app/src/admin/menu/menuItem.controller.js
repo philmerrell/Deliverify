@@ -7,8 +7,11 @@
     
     function MenuItemCtrl($mdDialog, $mdToast, $scope, $state, StoreService, AppService, MenuService, UploadService) {
       var vm = this;
+      vm.costInput = {};
       vm.menuService = MenuService;
-      
+
+      vm.addCost = addCost;
+      vm.deleteCost = deleteCost;
       vm.deleteMenuItem = deleteMenuItem;
       vm.fileChanged = fileChanged;
       vm.saveMenuItem = saveMenuItem;
@@ -26,12 +29,21 @@
       function activate() {
         if($state.params.name === 'new') {
           vm.menuItem = {
-            Ingredients: []
+            ingredients: [],
+            prices: []
           };
         } else {
           vm.menuItem = MenuService.getMenuItem();
         }
 
+      }
+
+      function addCost() {
+        vm.menuItem.prices.push(vm.costInput);
+      }
+
+      function deleteCost(cost) {
+        _.pull(vm.menuItem.prices, cost)
       }
       
       function deleteMenuItem(item, ev) {
@@ -64,9 +76,7 @@
         // Otherwise, create a new one
         return { Name: ingredient, type: 'new' }
       }
-      
-      /**
-       * TODO: Fix save vs add */
+
       function saveMenuItem(item) {
 
         if(item.$id) {
