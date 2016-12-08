@@ -39,6 +39,9 @@
       }
 
       function addCost() {
+        if(angular.isUndefined(vm.menuItem.prices)) {
+          vm.menuItem.prices = [];
+        }
         vm.menuItem.prices.push(vm.costInput);
       }
 
