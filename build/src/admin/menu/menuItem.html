@@ -1,13 +1,14 @@
-<div class="hero-container" style="min-height: 200px;">
-    <img ng-if="!vm.previewImage" ng-src="{{vm.menuItem.image.url}}" width="100%">
-    <img ng-if="vm.previewImage" ng-src="{{vm.previewImage.url}}" width="100%">
-    <div class="hero-container-content">
-      <h2 ng-if="!vm.menuItem" style="margin-top: 0;" class="md-headline">Add an image</h2>
-    </div>
-</div>
+<!--<div class="hero-container" style="min-height: 200px;">-->
+
+    <!--<div class="hero-container-content">-->
+      <!--<h2 ng-if="!vm.menuItem" style="margin-top: 0;" class="md-headline">Add an image</h2>-->
+    <!--</div>-->
+<!--</div>-->
 <div layout="row" layout-align="center center">
   <div style="max-width: 800px;" flex>
        <md-card>
+         <img ng-if="!vm.previewImage" ng-src="{{vm.menuItem.image.url}}" width="100%">
+         <img ng-if="vm.previewImage" ng-src="{{vm.previewImage.url}}" width="100%">
          <div layout="row">
            <span flex></span>
            <input class="ng-hide" id="input-file-id" type="file" onchange="angular.element(this).scope().vm.fileChanged(this)"/>
@@ -16,25 +17,26 @@
               <md-tooltip md-direction="top">Add photo</md-tooltip>
             </label>
          </div>
-        <!--<md-card-title ng-if="!vm.menuItem">
-          <h2 style="margin-top: 0;" class="md-headline">Add new menu item</h2>
-        </md-card-title>-->
         <md-card-content>
           <form class="admin-menu-item">
             <div layout-xs="column" layout-gt-xs="row">
               <md-input-container flex>
                     <label for="name">Item name</label>
                     <input md-autofocus type="text" id="name" ng-model="vm.menuItem.name">
-                </md-input-container>
-                <md-input-container flex>
-                  <label>Category</label>
-                  <md-select ng-model="vm.menuItem.category.name">
-                    <md-option ng-value="opt" ng-repeat="opt in vm.menuCategories">{{opt.name}}</md-option>
-                  </md-select>
-                </md-input-container>
+              </md-input-container>
+              <md-input-container flex>
+                <label>Category</label>
+                <md-select ng-model="vm.menuItem.category">
+                  <md-option ng-value="opt" ng-repeat="opt in vm.menuCategories">{{opt.name}}</md-option>
+                </md-select>
+              </md-input-container>
             </div>
+            <md-input-container class="md-block">
+              <label>Item Description</label>
+              <textarea ng-model="vm.menuItem.description" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+
             <div layout-xs="column" layout-gt-xs="row">
-              
               <md-input-container flex>
                 <label for="costDescription">Cost Description</label>
                 <input type="text" id="costDescription" ng-model="vm.costInput.description">
@@ -45,7 +47,6 @@
                 <input type="number" id="costPrice" ng-model="vm.costInput.cost">
               </md-input-container>
               <md-button ng-click="vm.addCost()" style="height: 20px;">Add Cost</md-button>
-
             </div>
             <div ng-if="vm.menuItem.prices.length">
               <md-subheader class="md-primary md-no-sticky">Prices</md-subheader>
@@ -59,32 +60,26 @@
               </md-list>
             </div>
 
-            <md-input-container class="md-block">
-              <label>Item Description</label>
-              <textarea ng-model="vm.menuItem.description" rows="5" md-select-on-focus></textarea>
-            </md-input-container>
-            
-            <md-subheader class="md-no-sticky">Ingredients</md-subheader>
-          
-            
-            <md-chips ng-model="vm.menuItem.ingredients" md-autocomplete-snap
-              md-transform-chip="vm.transformIngredientChip($chip)"
-              md-require-match="false">
-              <md-autocomplete
-                  md-selected-item="vm.selectedIngredient"
-                  md-search-text="vm.searchText"
-                  md-items="item in vm.ingredientSearch(vm.searchText)"
-                  md-item-text="item.name"
-                  placeholder="Add an ingredient">
-                <span md-highlight-text="ctrl.searchText">{{item.name}} :: {{item.type}}</span>
-              </md-autocomplete>
-              <md-chip-template>
-                <span>
-                  <strong>{{$chip.name}}</strong>
-                  <!--<em>({{$chip.type}})</em>-->
-                </span>
-              </md-chip-template>
-            </md-chips>
+
+            <!--<md-subheader class="md-no-sticky">Ingredients</md-subheader>-->
+            <!--<md-chips ng-model="vm.menuItem.ingredients" md-autocomplete-snap-->
+              <!--md-transform-chip="vm.transformIngredientChip($chip)"-->
+              <!--md-require-match="false">-->
+              <!--<md-autocomplete-->
+                  <!--md-selected-item="vm.selectedIngredient"-->
+                  <!--md-search-text="vm.searchText"-->
+                  <!--md-items="item in vm.ingredientSearch(vm.searchText)"-->
+                  <!--md-item-text="item.name"-->
+                  <!--placeholder="Add an ingredient">-->
+                <!--<span md-highlight-text="ctrl.searchText">{{item.name}} :: {{item.type}}</span>-->
+              <!--</md-autocomplete>-->
+              <!--<md-chip-template>-->
+                <!--<span>-->
+                  <!--<strong>{{$chip.name}}</strong>-->
+                  <!--&lt;!&ndash;<em>({{$chip.type}})</em>&ndash;&gt;-->
+                <!--</span>-->
+              <!--</md-chip-template>-->
+            <!--</md-chips>-->
             <md-button ng-click="vm.saveMenuItem(vm.menuItem);" style="width: 100%" class="md-primary md-raised">Save Item</md-button>
             <md-button ng-if="vm.menuItem.$id" ng-click="vm.deleteMenuItem(vm.menuItem, $event);" style="width: 100%" class="md-warn">Delete</md-button>
           </form>

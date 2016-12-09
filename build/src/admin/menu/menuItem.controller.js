@@ -21,7 +21,7 @@
       vm.menuCategories = MenuService.getMenuCategories();
 
       AppService.setNavTitle('MENU');
-      
+
       activate();
       
       //////////////////////////
