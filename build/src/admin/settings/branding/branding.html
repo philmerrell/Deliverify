@@ -14,28 +14,30 @@
                     <!--<div class="hint">This will be displayed on the home view.</div>-->
                 </md-input-container>
             </div>
-            <div layout-xs="column" layout-gt-xs="row">
-                <div flex-gt-xs="33" flex>
-                    <color-picker ng-model="vm.branding.primaryColor" color-picker-format="'hex'"></color-picker>
-                    <div class="hint">Primary color</div>
-                </div>
-                <div flex-gt-xs="33" flex>
-                    <color-picker ng-model="vm.branding.secondaryColor" color-picker-format="'hex'"></color-picker>
-                    <div class="hint">Secondary color</div>
-                </div>
-                <div flex-gt-xs="33" flex>
-                    <color-picker ng-model="vm.branding.attentionColor" color-picker-format="'hex'"></color-picker>
-                    <div class="hint">Attention color</div>
-                </div>
-            </div>
+            <!--<div layout-xs="column" layout-gt-xs="row">-->
+                <!--<div flex-gt-xs="33" flex>-->
+                    <!--<color-picker ng-model="vm.branding.primaryColor" color-picker-format="'hex'"></color-picker>-->
+                    <!--<div class="hint">Primary color</div>-->
+                <!--</div>-->
+                <!--<div flex-gt-xs="33" flex>-->
+                    <!--<color-picker ng-model="vm.branding.secondaryColor" color-picker-format="'hex'"></color-picker>-->
+                    <!--<div class="hint">Secondary color</div>-->
+                <!--</div>-->
+                <!--<div flex-gt-xs="33" flex>-->
+                    <!--<color-picker ng-model="vm.branding.attentionColor" color-picker-format="'hex'"></color-picker>-->
+                    <!--<div class="hint">Attention color</div>-->
+                <!--</div>-->
+            <!--</div>-->
             <div layout-xs="column" layout-gt-xs="row">
                 <input class="ng-hide" id="input-file-id" type="file" onchange="angular.element(this).scope().vm.fileChanged(this)"/>
                 <label for="input-file-id" class="md-button md-raised md-primary">Choose an image</label>
-                <div>{{vm.branding.image.fileName}}</div>
+                <div ng-if="!vm.previewImage">{{vm.branding.image.fileName}}</div>
+                <div ng-if="vm.previewImage">{{vm.previewImage.name}}</div>
             </div>
             <div>
                 <h4>Image Preview</h4>
-                <img ng-src="{{vm.branding.image.url}}" width="100%">
+                <img ng-if="!vm.previewImage" ng-src="{{vm.branding.image.url}}" width="100%">
+                <img ng-if="vm.previewImage" ng-src="{{vm.previewImage.url}}" width="100%">
             </div>
 
             <md-button ng-click="vm.saveStoreInfo()" style="width: 100%" class="md-primary md-raised">Save</md-button>

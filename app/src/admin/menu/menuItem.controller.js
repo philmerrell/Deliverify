@@ -7,8 +7,10 @@
     
     function MenuItemCtrl($mdDialog, $mdToast, $scope, $state, StoreService, AppService, MenuService, UploadService) {
       var vm = this;
+      var newImage = false;
       vm.costInput = {};
       vm.menuService = MenuService;
+      vm.previewImage = false;
 
       vm.addCost = addCost;
       vm.deleteCost = deleteCost;
@@ -20,8 +22,6 @@
 
       AppService.setNavTitle('MENU');
 
-      var menuItems = MenuService.getMenuItems();
-      
       activate();
       
       //////////////////////////
@@ -63,7 +63,7 @@
             // _.pull(MenuService.getMenuItems(), item);
             console.log(item);
             MenuService.removeMenuItem(item);
-            showToast('Menu item removed')
+            showToast('Menu item removed');
             $state.go('admin.menu');
           }, function() {
            
@@ -82,15 +82,40 @@
 
       function saveMenuItem(item) {
 
-        if(item.$id) {
+          if(vm.previewImage) {
+            // If an image url exists, we need to delete and image
+            if(item.image.url) {
+              deleteImage().then(function() {
+                uploadImage(newImage).then(function(imageURL) {
+                  item.image.url = imageURL;
+                  save(item);
+                });
+              });
+
+            // An image url doesn't exist, so no image needs to be deleted.
+            } else {
+              uploadImage(newImage).then(function(imageURL) {
+                item.image.url = imageURL;
+                save(item);
+              });
+            }
+          // We just need to update the attributes, no image.
+          } else {
+            save(item);
+          }
+
+      }
+
+      function save(item) {
+        if (item.$id) {
           MenuService.saveMenuItem(item);
         } else {
-          MenuService.addMenuItem(item);      
+          MenuService.addMenuItem(item);
         }
-
         showToast('Menu item saved');
         $state.go('admin.menu');
       }
+
       
       function showToast(content) {
         $mdToast.show(
@@ -102,24 +127,18 @@
       }
 
       function fileChanged(el) {
-        var file = el.files[0];
-        if(vm.menuItem.image) {
-          deleteImage().then(function() {
-            uploadImage(file);
-          });
-        } else {
-          uploadImage(file);
-        }
+        vm.previewImage = {};
+        newImage = el.files[0];
+        console.log('newImage', newImage);
+        vm.previewImage.name = newImage.name;
+        vm.previewImage.url = window.URL.createObjectURL(newImage);
+        $scope.$apply();
+
       }
 
     function uploadImage(file) {
-      return UploadService.uploadImage(file, 'menu/')
-        .then(function(imageURL) {
-          vm.menuItem.image = {
-            fileName: file.name,
-            url: imageURL
-          };
-        });
+      vm.menuItem.image.fileName = file.name;
+      return UploadService.uploadImage(file, 'menu/');
     }
 
     function deleteImage() {

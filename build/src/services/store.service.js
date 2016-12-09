@@ -38,7 +38,6 @@
 
       function saveStore(store) {
         store.$save().then(function(ref) {
-          ref.key === obj.$id; // true
         }, function(error) {
           console.log("Error:", error);
         });
@@ -90,7 +89,7 @@
       }
 
       // function getIncomingOrders() {
-        
+
       //   if(storeId === 'demo') {
       //     return $firebaseArray(ref.orderByChild("progress").equalTo("Ordered"));
       //   } else {}

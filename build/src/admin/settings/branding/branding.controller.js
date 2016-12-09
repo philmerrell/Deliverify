@@ -6,10 +6,12 @@
     .controller('BrandingCtrl', SettingsCtrl);
 
 
-  function SettingsCtrl($mdToast, AppService, UploadService, StoreService) {
+  function SettingsCtrl($mdToast, $scope, AppService, UploadService, StoreService) {
     var vm = this;
+    var newImage = false;
 
     vm.branding = StoreService.getStoreBranding();
+    vm.previewImage = false;
 
     vm.fileChanged = fileChanged;
     vm.saveStoreInfo = saveStoreInfo;
@@ -25,27 +27,17 @@
     }
 
     function fileChanged(el) {
-      var file = el.files[0];
-      console.log(file);
-      if(vm.branding.image) {
-        deleteImage().then(function() {
-          uploadImage(file);
-        });
-      } else {
-        uploadImage(file);
-      }
-      
-      
+      vm.previewImage = {};
+      newImage = el.files[0];
+      vm.previewImage.name = newImage.name;
+      vm.previewImage.url = window.URL.createObjectURL(newImage);
+      $scope.$apply();
     }
 
     function uploadImage(file) {
-      return UploadService.uploadImage(file, 'brand/')
-        .then(function(imageURL) {
-          vm.branding.image = {
-            fileName: file.name,
-            url: imageURL
-          };
-        });
+      vm.branding.image.name = file.name;
+      return UploadService.uploadImage(file, 'brand/');
+
     }
 
     function deleteImage() {
@@ -53,13 +45,40 @@
     }
 
     function saveStoreInfo() {
-      StoreService.saveStore(vm.branding);
+
+      // TODO: Clean up and simplify promises
+      // We want to save a new image since one is being previewed.
+      if(vm.previewImage) {
+        // If an image url exists, we need to delete and image
+        if(vm.branding.image.url) {
+          deleteImage().then(function() {
+            uploadImage(newImage).then(function(imageURL) {
+              vm.branding.image.url = imageURL;
+              StoreService.saveStore(vm.branding);
+            });
+          });
+
+        // An image url doesn't exist, so no image needs to be deleted.
+        } else {
+          uploadImage(newImage).then(function(imageURL) {
+            vm.branding.image.url = imageURL;
+            StoreService.saveStore(vm.branding);
+          });
+        }
+      // We just need to update the attributes, no image.
+      } else {
+
+        StoreService.saveStore(vm.branding);
+      }
+
+      // TODO: Show when save is verified successful.
       $mdToast.show(
         $mdToast.simple()
           .textContent('Settings updated')
           .position('top right')
           .hideDelay(3000)
       );
+
     }
   }
 })();

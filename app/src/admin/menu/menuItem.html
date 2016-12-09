@@ -1,4 +1,6 @@
-<div class="hero-container" style="min-height: 200px; background-image: url({{vm.menuItem.image.url}}); background-position: center; background-size: cover;">
+<div class="hero-container" style="min-height: 200px;">
+    <img ng-if="!vm.previewImage" ng-src="{{vm.menuItem.image.url}}" width="100%">
+    <img ng-if="vm.previewImage" ng-src="{{vm.previewImage.url}}" width="100%">
     <div class="hero-container-content">
       <h2 ng-if="!vm.menuItem" style="margin-top: 0;" class="md-headline">Add an image</h2>
     </div>
@@ -19,19 +21,19 @@
         </md-card-title>-->
         <md-card-content>
           <form class="admin-menu-item">
-            <div style="width: 100%" layout-xs="column" layout-gt-xs="row">
-              <md-input-container>
+            <div layout-xs="column" layout-gt-xs="row">
+              <md-input-container flex>
                     <label for="name">Item name</label>
                     <input md-autofocus type="text" id="name" ng-model="vm.menuItem.name">
                 </md-input-container>
                 <md-input-container flex>
                   <label>Category</label>
-                  <md-select ng-model="vm.menuItem.category">
+                  <md-select ng-model="vm.menuItem.category.name">
                     <md-option ng-value="opt" ng-repeat="opt in vm.menuCategories">{{opt.name}}</md-option>
                   </md-select>
                 </md-input-container>
             </div>
-            <div style="width: 100%" layout-xs="column" layout-gt-xs="row">
+            <div layout-xs="column" layout-gt-xs="row">
               
               <md-input-container flex>
                 <label for="costDescription">Cost Description</label>
