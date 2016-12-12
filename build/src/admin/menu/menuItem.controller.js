@@ -66,9 +66,9 @@
             showToast('Menu item removed');
             $state.go('admin.menu');
           }, function() {
-           
+
           });
-        
+
       }
       
       function transformIngredientChip(ingredient) {
@@ -116,12 +116,12 @@
         $state.go('admin.menu');
       }
 
-      
+
       function showToast(content) {
         $mdToast.show(
           $mdToast.simple()
             .textContent(content)
-            .position('bottom right')
+            .position('top right')
             .hideDelay(3000)
         );
       }

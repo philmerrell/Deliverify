@@ -1,0 +1,124 @@
+<!--<div class="hero-container" style="position: absolute; top: 0; bottom: 0; right: 0; left: 0;">-->
+    <!--<div layout="column" layout-align="center center">-->
+        <!--<ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>-->
+            <!--<ui-gmap-drawing-manager options="vm.drawingManagerOptions" control="vm.drawingManagerControl"></ui-gmap-drawing-manager>-->
+            <!--<ui-gmap-polygon path="vm.zone">-->
+            <!--</ui-gmap-polygon>-->
+        <!--</ui-gmap-google-map>-->
+    <!--</div>-->
+<!--</div>-->
+<div layout="row" layout-align="center center">
+    <div style="max-width: 800px;" flex>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Info">
+                <md-card style="max-width: 800px;" layout-padding flex>
+                    <!--<h3>Store contact information</h3>-->
+                    <!--<h1 class="md-headline">Configure how customers connect to you</h1>-->
+
+                    <form name="location" class="free-trial">
+                        <md-input-container>
+                            <label for="name">Store name</label>
+                            <input type="text" id="name" ng-model="vm.location.name" required>
+                        </md-input-container>
+                        <md-input-container style="width: 100%">
+                            <label for="address">Store address</label>
+                            <input type="text" id="address" ng-model="vm.location.address">
+                        </md-input-container>
+                        <md-input-container style="width: 100%">
+                            <label for="address2">Apt, Suite, Etc...</label>
+                            <input type="text" id="address2" ng-model="vm.location.address2">
+                        </md-input-container>
+                        <div layout-xs="column" layout-gt-xs="row">
+                            <md-input-container flex-xs="30" flex>
+                                <label for="city">City</label>
+                                <input type="text" id="city" ng-model="vm.location.city">
+                            </md-input-container>
+                            <md-input-container flex-xs="30" flex>
+                                <label for="state">State</label>
+                                <input type="text" id="state" ng-model="vm.location.state">
+                            </md-input-container>
+                            <md-input-container flex-xs="30" flex>
+                                <label for="zip">Zip</label>
+                                <input type="text" id="zip" ng-model="vm.location.zip">
+                            </md-input-container>
+                        </div>
+                        <div layout-xs="column" layout-gt-xs="row">
+                            <md-input-container flex-xs="50" flex>
+                                <label for="storeEmail">Store email</label>
+                                <input type="text" id="storeEmail" ng-model="vm.location.email">
+                                <div class="hint">What email address can your customers contact you at?</div>
+                            </md-input-container>
+                            <md-input-container flex-xs="50" flex>
+                                <label for="storePhone">Store phone</label>
+                                <input type="text" id="storePhone" ng-model="vm.location.phone">
+                                <div class="hint">What number can your customers reach you at?</div>
+                            </md-input-container>
+                        </div>
+                        <md-button ng-click="vm.saveStoreLocation();" style="width: 100%" class="md-primary md-raised">Save Info</md-button>
+                        <md-button ng-if="vm.location.$id" ng-click="vm.deleteStoreLocation(vm.location, $event);" style="width: 100%" class="md-warn">Delete</md-button>
+                    </form>
+                </md-card>
+
+            </md-tab>
+            <md-tab label="Hours">
+                <md-card style="max-width: 800px;" layout-padding flex>
+                    <h1 class="md-headline">Let your customers know when you're open</h1>
+                    <!--<h2 class="md-subhead">Add hours</h2>-->
+                    <form ng-submit="vm.addHours(vm.newHours)">
+                        <div layout-xs="column" layout-gt-xs="row">
+                            <md-input-container flex-gt-xs="20" flex>
+                                <label for="displayName">Start time</label>
+                                <input type="text" id="displayName" ng-model="vm.newHours.startTime">
+                                <!--<div class="hint">This will be displayed through out your app.</div>-->
+                            </md-input-container>
+                            <md-input-container flex-gt-xs="20" flex>
+                                <label for="tagline">End time</label>
+                                <input type="text" id="tagline" ng-model="vm.newHours.endTime">
+                                <!--<div class="hint">This will be displayed on the home view.</div>-->
+                            </md-input-container>
+
+                            <md-input-container flex-gt-xs="50" flex>
+                                <md-select ng-model="vm.newHours.day" placeholder="Select a day">
+                                    <md-option value="Monday">Monday</md-option>
+                                    <md-option value="Tuesday">Tuesday</md-option>
+                                    <md-option value="Wednesday">Wednesday</md-option>
+                                    <md-option value="Thursday">Thursday</md-option>
+                                    <md-option value="Friday">Friday</md-option>
+                                    <md-option value="Saturday">Saturday</md-option>
+                                    <md-option value="Sunday">Sunday</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-button ng-click="vm.addHours(vm.newHours)" class="md-primary">add</md-button>
+                        </div>
+                    </form>
+                    <div layout-xs="column" layout-gt-xs="row">
+
+                    </div>
+
+                    <md-list>
+                        <md-list-item class="secondary-button-padding md-2-line" ng-repeat="open in vm.hours">
+                            <div class="md-list-item-text">
+                                <h3>{{open.day}}</h3>
+                                <p>{{open.startTime}} to {{open.endTime}}</p>
+                            </div>
+                            <md-button class="md-warn" ng-click="vm.removeHours(open)">delete</md-button>
+
+                            <md-divider></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </md-card>
+            </md-tab>
+            <md-tab label="Map">
+                <!--<div class="hero-container" flex style="position: absolute; top: 0; bottom: 0; right: 0; left: 0;">-->
+                    <!--<div layout="column" layout-align="center center">-->
+                        <!--<ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>-->
+                            <!--<ui-gmap-drawing-manager options="vm.drawingManagerOptions" control="vm.drawingManagerControl"></ui-gmap-drawing-manager>-->
+                            <!--<ui-gmap-polygon path="vm.zone">-->
+                            <!--</ui-gmap-polygon>-->
+                        <!--</ui-gmap-google-map>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </md-tab>
+        </md-tabs>
+    </div>
+</div>

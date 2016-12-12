@@ -37,7 +37,6 @@
         MenuService.setMenuItem(item);
         // openSidenav();
         $state.go('admin.menuItem', {name: item.Name});
-      
       }
       
       function addMenuItem() {

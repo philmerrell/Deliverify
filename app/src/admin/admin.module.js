@@ -90,6 +90,16 @@
             }
           }
         })
+
+        .state('admin.locationDetail', {
+          url: '/locations/:name',
+          views: {
+            "admin": {
+              templateUrl: 'src/admin/settings/locations/locationDetail.html',
+              controller: 'LocationDetailCtrl as vm'
+            }
+          }
+        })
         
         .state('admin.zones', {
           url: '/settings/zones',

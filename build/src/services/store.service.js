@@ -8,19 +8,27 @@
     function StoreService($firebaseArray, $firebaseObject, $state) {
       var ref = null;
       var storeObj = null;
+      var storeLocation = null;
 
       var service = {
-        addStoreHours   : addStoreHours,
-        removeStoreHours  : removeStoreHours,
-        createNewStore  : createNewStore,
-        saveStore       : saveStore,
-        getStoreBranding: getStoreBranding,
-        getStoreHours   : getStoreHours,
-        getStoreInfo    : getStoreInfo,
-        getDemoStore    : getDemoStore,
-        getStoreRef     : getStoreRef,
-        setStoreRef     : setStoreRef,
-        getStoreObj     : getStoreObj
+        addStoreHours       : addStoreHours,
+        addStoreLocation    : addStoreLocation,
+        createNewStore      : createNewStore,
+        getStoreObj         : getStoreObj,
+        getStoreBranding    : getStoreBranding,
+        getStoreHours       : getStoreHours,
+        getStoreInfo        : getStoreInfo,
+        getStoreLocations   : getStoreLocations,
+        getStoreLocation    : getStoreLocation,
+        getDemoStore        : getDemoStore,
+        getStoreRef         : getStoreRef,
+        removeStoreHours    : removeStoreHours,
+        removeStoreLocation : removeStoreLocation,
+        saveStore           : saveStore,
+        saveStoreLocation   : saveStoreLocation,
+        setStoreLocation    : setStoreLocation,
+        // setStoreObj         : setStoreObj,
+        setStoreRef         : setStoreRef
       };
       
       return service;
@@ -51,6 +59,26 @@
         getStoreHours().$remove(hours);
       }
 
+      function addStoreLocation(location) {
+        getStoreLocations().$add(location);
+      }
+
+      function getStoreLocation() {
+        return storeLocation;
+      }
+
+      function setStoreLocation(location) {
+        storeLocation = location
+      }
+
+      function removeStoreLocation(location) {
+        getStoreLocations().$remove(location);
+      }
+
+      function saveStoreLocation(location) {
+        getStoreLocations().$save(location);
+      }
+
       function getStoreInfo() {
         return $firebaseObject(ref.child('info'));
       }
@@ -63,8 +91,11 @@
         return $firebaseArray(ref.child('hours'));
       }
 
+      function getStoreLocations() {
+        return $firebaseArray(ref.child('locations'));
+      }
+
       function getDemoStore() {
-        
         return {
           info: {
             name: 'The Appwich 5000',
@@ -87,25 +118,10 @@
                     
         }
       }
-
-      // function getIncomingOrders() {
-
-      //   if(storeId === 'demo') {
-      //     return $firebaseArray(ref.orderByChild("progress").equalTo("Ordered"));
-      //   } else {}
-      // }
-
-      // function getReadyForDeliveryOrders() {
-      //   return $firebaseArray(ref.orderByChild("progress").equalTo("Made"));
-      // }
-
-      // function getEnrouteDeliveryOrders() {
-      //   return $firebaseArray(ref.orderByChild("progress").equalTo("Delivering"));
-      // }
       
-      function setStoreObj(id) {
-        var storeRef = $firebaseObject(ref);
-      }
+      // function setStoreObj(id) {
+      //   var storeRef = $firebaseObject(ref);
+      // }
 
       function setStoreRef(uid) {
         ref = firebase.database().ref('stores/' + uid);
@@ -120,16 +136,5 @@
         return storeObj;
       }
 
-      //function updateDeliveryStatusToEnroute(order) {
-      //  order.orderStatus = 'Order Enroute';
-      //  order.progress = 'Delivering';
-      //  order.selected = false;
-      //
-      //  var orderRef = ref.child(order.$id);
-      //  orderRef.update(order);
-      //
-      //  //ref.update(order);
-      //
-      //}
     }
 })();
