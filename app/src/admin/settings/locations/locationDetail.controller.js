@@ -14,7 +14,9 @@
 
     vm.location = {};
 
+    vm.addHours = addHours;
     vm.deleteStoreLocation = deleteStoreLocation;
+    vm.removeHours = removeHours;
     vm.saveStoreLocation = saveStoreLocation;
 
     activate();
@@ -33,6 +35,31 @@
 
       var storeName = angular.isDefined(vm.location.name) ? vm.location.name.toUpperCase() : 'ADD LOCATION';
       AppService.setNavTitle(storeName);
+    }
+
+    function addHours(hours) {
+      hours.startTime = hours.startTime.getTime();
+      hours.endTime = hours.endTime.getTime();
+      if(angular.isUndefined(vm.location.hours)) {
+        vm.location.hours = [];
+      }
+      vm.location.hours.push(hours);
+
+      // StoreService.addStoreHours(hours);
+      // vm.hours.push(hours);
+      vm.newHours = {};
+      saveStoreLocation(vm.location);
+
+    }
+
+    function removeHours(hours) {
+      StoreService.removeStoreHours(hours);
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent('hours removed')
+          .position('bottom right')
+          .hideDelay(3000)
+      );
     }
 
 

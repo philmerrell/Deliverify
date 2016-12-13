@@ -30,6 +30,9 @@
 
 
     function addHours(hours) {
+      hours.startTime = hours.startTime.getTime();
+      hours.endTime = hours.endTime.getTime();
+
       StoreService.addStoreHours(hours);
       // vm.hours.push(hours);
       vm.newHours = {};

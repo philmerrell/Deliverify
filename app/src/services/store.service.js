@@ -81,7 +81,6 @@
       }
 
       function saveStoreLocation(location) {
-        console.log(getStoreLocations(), location);
         getStoreLocations().$save(location);
       }
 

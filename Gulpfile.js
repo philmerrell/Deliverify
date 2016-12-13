@@ -22,8 +22,10 @@ var npmSources = [
   'node_modules/textangular/dist/textAngular.min.js',
   'node_modules/textangular/dist/textAngular.css',
   'node_modules/font-awesome/css/font-awesome.css',
-  'node_modules/mdPickers/dist/mdPickers.js',
-  'node_modules/mdPickers/dist/mdPickers.css'
+  'node_modules/moment/min/moment.min.js',
+  'node_modules/mdPickers/dist/mdPickers.css',
+  'node_modules/mdPickers/dist/mdPickers.js'
+
 ];
 
 
