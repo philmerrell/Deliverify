@@ -12,6 +12,7 @@
     "angular-ui-router": "^0.3.2",
     "angularjs-color-picker": "^1.0.1",
     "font-awesome": "^4.5.0",
+    "mdPickers": "^0.7.5",
     "textangular": "^1.5.0"
   },
   "devDependencies": {

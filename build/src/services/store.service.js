@@ -7,8 +7,10 @@
     
     function StoreService($firebaseArray, $firebaseObject, $state) {
       var ref = null;
+      var hoursArray = null;
       var storeObj = null;
       var storeLocation = null;
+      var storeLocations = null;
 
       var service = {
         addStoreHours       : addStoreHours,
@@ -56,7 +58,10 @@
       }
 
       function removeStoreHours(hours) {
-        getStoreHours().$remove(hours);
+        console.log(getStoreHours(), hours);
+        getStoreHours().$remove(hours).catch(function(err) {
+          console.log(err);
+        });
       }
 
       function addStoreLocation(location) {
@@ -72,10 +77,11 @@
       }
 
       function removeStoreLocation(location) {
-        getStoreLocations().$remove(location);
+        getStoreLocations().$remove(location.$id);
       }
 
       function saveStoreLocation(location) {
+        console.log(getStoreLocations(), location);
         getStoreLocations().$save(location);
       }
 
@@ -88,11 +94,17 @@
       }
 
       function getStoreHours() {
-        return $firebaseArray(ref.child('hours'));
+        if(!hoursArray) {
+          hoursArray = $firebaseArray(ref.child('hours'));
+        }
+        return hoursArray;
       }
 
       function getStoreLocations() {
-        return $firebaseArray(ref.child('locations'));
+        if(!storeLocations) {
+          storeLocations = $firebaseArray(ref.child('locations'));
+        }
+        return storeLocations;
       }
 
       function getDemoStore() {

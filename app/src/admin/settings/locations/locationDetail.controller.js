@@ -36,11 +36,12 @@
     }
 
 
-    function saveStoreLocation() {
+    function saveStoreLocation(location) {
+      // console.log(vm.location);
       if (vm.location.$id) {
-        StoreService.saveStoreLocation(vm.location);
+        StoreService.saveStoreLocation(location);
       } else {
-        StoreService.addStoreLocation(vm.location);
+        StoreService.addStoreLocation(location);
       }
       showToast('Menu item saved');
       $state.go('admin.locations');

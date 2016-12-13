@@ -16,7 +16,7 @@
                     <!--<h1 class="md-headline">Configure how customers connect to you</h1>-->
 
                     <form name="location" class="free-trial">
-                        <md-input-container>
+                        <md-input-container style="width: 100%">
                             <label for="name">Store name</label>
                             <input type="text" id="name" ng-model="vm.location.name" required>
                         </md-input-container>
@@ -54,7 +54,7 @@
                                 <div class="hint">What number can your customers reach you at?</div>
                             </md-input-container>
                         </div>
-                        <md-button ng-click="vm.saveStoreLocation();" style="width: 100%" class="md-primary md-raised">Save Info</md-button>
+                        <md-button ng-click="vm.saveStoreLocation(vm.location);" style="width: 100%" class="md-primary md-raised">Save Info</md-button>
                         <md-button ng-if="vm.location.$id" ng-click="vm.deleteStoreLocation(vm.location, $event);" style="width: 100%" class="md-warn">Delete</md-button>
                     </form>
                 </md-card>
